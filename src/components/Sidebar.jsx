@@ -71,16 +71,17 @@ export default function Sidebar() {
         fontFamily: "'Poppins', sans-serif",
       }}
     >
-      {/* Nav items */}
+      {/* Nav items - Vertically Centered */}
       <div
+        className="flex-1 flex flex-col justify-center items-center w-full"
         style={{
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
-          gap: "8px",
+          justifyContent: "center",
+          gap: "12px",
           width: "100%",
           flex: 1,
-          overflowY: "auto",
         }}
       >
         {isAcademics && (

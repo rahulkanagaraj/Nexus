@@ -363,9 +363,9 @@ export default function IpFilingTracker() {
             <div>
               <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
                 <ShieldCheck size={28} color="#8B5CF6" />
-                <h2 style={{ margin: 0, fontSize: "24px", fontWeight: 700, color: "#FAFAFA", letterSpacing: "-0.5px" }}>
+                <h1 style={{ margin: 0, fontSize: "24px", fontWeight: 700, color: "#FAFAFA", letterSpacing: "-0.5px" }}>
                   Campus IP &amp; Patent Tracker
-                </h2>
+                </h1>
               </div>
             </div>
 

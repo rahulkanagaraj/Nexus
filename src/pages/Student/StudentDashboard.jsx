@@ -236,12 +236,9 @@ export default function StudentDashboard() {
             }}
           >
             <div>
-              <div style={{ fontSize: "12px", color: "#71717A", marginBottom: "2px" }}>
-                Student Dashboard / <span style={{ color: "#A1A1AA" }}>Overview</span>
-              </div>
-              <h2 style={{ margin: 0, fontSize: "24px", fontWeight: 700, color: "#FAFAFA", letterSpacing: "-0.5px" }}>
+              <h1 style={{ margin: 0, fontSize: "24px", fontWeight: 700, color: "#FAFAFA", letterSpacing: "-0.5px" }}>
                 Research Workspace
-              </h2>
+              </h1>
             </div>
 
             {/* Submit Proposal — opens NewProjectModal */}
@@ -469,8 +466,8 @@ export default function StudentDashboard() {
 
                   {/* Abstract */}
                   <div style={{ marginBottom: "20px" }}>
-                    <h4 style={{ margin: "0 0 8px", fontSize: "12px", fontWeight: 700, color: "#71717A", textTransform: "uppercase", letterSpacing: "0.05em" }}>
-                      Abstract Summary
+                    <h4 style={{ margin: "0 0 8px", fontSize: "13px", fontWeight: 700, color: "#FAFAFA" }}>
+                      Abstract &amp; Novelty Claims
                     </h4>
                     <p style={{ fontSize: "13px", color: "#A1A1AA", lineHeight: 1.6, margin: 0 }}>
                       {selectedProject.abstractText || selectedProject.abstract_text || "No abstract available."}

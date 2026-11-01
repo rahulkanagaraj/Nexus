@@ -59,51 +59,77 @@ export default function AiInsightsCard({ project, onProjectUpdated, onOpenPatent
       }}
     >
       {/* ── Header ─────────────────────────────────────────────────────────── */}
-      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "12px" }}>
-        <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+      <div
+        className="flex items-center justify-between flex-wrap gap-3"
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          marginBottom: "14px",
+          flexWrap: "wrap",
+          gap: "12px",
+        }}
+      >
+        <div
+          className="flex items-center gap-2.5"
+          style={{ display: "flex", alignItems: "center", gap: "10px" }}
+        >
           <div
             style={{
-              width: "30px",
-              height: "30px",
+              width: "32px",
+              height: "32px",
               borderRadius: "8px",
-              backgroundColor: "#3B82F6",
+              backgroundColor: "rgba(59, 130, 246, 0.15)",
+              border: "1px solid rgba(59, 130, 246, 0.3)",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
+              flexShrink: 0,
             }}
           >
-            <Sparkles size={16} color="#FFFFFF" />
+            <Sparkles size={16} color="#3B82F6" />
           </div>
           <div>
-            <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-              <h4 style={{ margin: 0, fontSize: "14px", fontWeight: 700, color: "#FAFAFA" }}>
+            <div
+              className="flex items-center gap-2 flex-wrap"
+              style={{ display: "flex", alignItems: "center", gap: "8px", flexWrap: "wrap" }}
+            >
+              <h4 style={{ margin: 0, fontSize: "14px", fontWeight: 700, color: "#FAFAFA", lineHeight: 1.2 }}>
                 AI Research &amp; Patentability Insights
               </h4>
               <span
+                className="inline-flex items-center"
                 style={{
                   fontSize: "10px",
                   fontWeight: 600,
                   color: "#3B82F6",
-                  backgroundColor: "rgba(59,130,246,0.1)",
+                  backgroundColor: "rgba(59, 130, 246, 0.1)",
                   padding: "2px 8px",
                   borderRadius: "9999px",
-                  border: "1px solid rgba(59,130,246,0.2)",
+                  border: "1px solid rgba(59, 130, 246, 0.2)",
+                  lineHeight: "14px",
+                  display: "inline-flex",
+                  alignItems: "center",
                 }}
               >
                 Deep Analytical Engine
               </span>
             </div>
-            <p style={{ margin: 0, fontSize: "12px", color: "#71717A" }}>
+            <p style={{ margin: "2px 0 0 0", fontSize: "12px", color: "#71717A", lineHeight: 1.2 }}>
               Novelty, methodology &amp; IP viability evaluation
             </p>
           </div>
         </div>
 
-        <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+        <div
+          className="flex items-center gap-2 flex-wrap"
+          style={{ display: "flex", alignItems: "center", gap: "8px", flexWrap: "wrap" }}
+        >
           {/* Re-Analyze button — triggers POST /api/projects/{id}/ai-insights */}
           <button
             onClick={handleRefreshInsights}
             disabled={loading}
+            className="flex items-center gap-1.5"
             style={{
               padding: "6px 12px",
               borderRadius: "8px",
@@ -119,13 +145,14 @@ export default function AiInsightsCard({ project, onProjectUpdated, onOpenPatent
             }}
           >
             <RefreshCw size={12} className={loading ? "spin" : ""} />
-            {loading ? "Analyzing..." : "Re-Analyze"}
+            <span>{loading ? "Analyzing..." : "Re-Analyze"}</span>
           </button>
 
           {/* Patent Studio button */}
           {onOpenPatentStudio && (
             <button
               onClick={() => onOpenPatentStudio(project)}
+              className="flex items-center gap-1.5"
               style={{
                 padding: "6px 12px",
                 borderRadius: "8px",
@@ -141,14 +168,24 @@ export default function AiInsightsCard({ project, onProjectUpdated, onOpenPatent
               }}
             >
               <Award size={12} />
-              Patent Studio
+              <span>Patent Studio</span>
             </button>
           )}
 
           {/* Collapse toggle */}
           <button
             onClick={() => setCollapsed(!collapsed)}
-            style={{ background: "none", border: "none", cursor: "pointer", color: "#52525B", padding: "4px" }}
+            className="flex items-center justify-center"
+            style={{
+              background: "none",
+              border: "none",
+              cursor: "pointer",
+              color: "#71717A",
+              padding: "4px",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
           >
             {collapsed ? <ChevronDown size={16} /> : <ChevronUp size={16} />}
           </button>
