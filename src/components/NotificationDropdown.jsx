@@ -51,8 +51,8 @@ export default function NotificationDropdown({ user }) {
         onClick={() => setIsOpen(!isOpen)}
         style={{
           position: "relative",
-          background: "#F1F5F9",
-          border: "1px solid #E2E8F0",
+          background: "#18181B",
+          border: "1px solid #27272A",
           borderRadius: "50%",
           width: "38px",
           height: "38px",
@@ -63,7 +63,7 @@ export default function NotificationDropdown({ user }) {
           transition: "all 0.2s",
         }}
       >
-        <Bell size={18} color="#475569" />
+        <Bell size={18} color="#FAFAFA" />
         {unreadCount > 0 && (
           <span
             style={{
@@ -80,7 +80,7 @@ export default function NotificationDropdown({ user }) {
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              border: "2px solid #FFFFFF",
+              border: "2px solid #18181B",
             }}
           >
             {unreadCount > 9 ? "9+" : unreadCount}
@@ -95,10 +95,10 @@ export default function NotificationDropdown({ user }) {
             right: 0,
             top: "46px",
             width: "360px",
-            backgroundColor: "#FFFFFF",
+            backgroundColor: "#18181B",
             borderRadius: "12px",
-            boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.15), 0 8px 10px -6px rgba(0, 0, 0, 0.1)",
-            border: "1px solid #E2E8F0",
+            boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.5), 0 8px 10px -6px rgba(0, 0, 0, 0.3)",
+            border: "1px solid #27272A",
             zIndex: 1000,
             overflow: "hidden",
             fontFamily: "'Poppins', sans-serif",
@@ -107,23 +107,23 @@ export default function NotificationDropdown({ user }) {
           <div
             style={{
               padding: "12px 16px",
-              borderBottom: "1px solid #F1F5F9",
+              borderBottom: "1px solid #27272A",
               display: "flex",
               alignItems: "center",
               justifyContent: "space-between",
-              backgroundColor: "#F8FAFC",
+              backgroundColor: "#141416",
             }}
           >
             <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-              <Bell size={16} color="#4B5D8C" />
-              <span style={{ fontSize: "14px", fontWeight: 600, color: "#1E293B" }}>
+              <Bell size={16} color="#8B5CF6" />
+              <span style={{ fontSize: "14px", fontWeight: 600, color: "#FAFAFA" }}>
                 Notifications
               </span>
               {unreadCount > 0 && (
                 <span
                   style={{
-                    backgroundColor: "#DBEAFE",
-                    color: "#1E40AF",
+                    backgroundColor: "rgba(59, 130, 246, 0.15)",
+                    color: "#93C5FD",
                     fontSize: "11px",
                     fontWeight: 600,
                     padding: "2px 8px",
@@ -141,7 +141,7 @@ export default function NotificationDropdown({ user }) {
                 style={{
                   background: "none",
                   border: "none",
-                  color: "#2563EB",
+                  color: "#3B82F6",
                   fontSize: "11px",
                   fontWeight: 600,
                   cursor: "pointer",
@@ -161,7 +161,7 @@ export default function NotificationDropdown({ user }) {
                 style={{
                   padding: "24px",
                   textAlign: "center",
-                  color: "#94A3B8",
+                  color: "#71717A",
                   fontSize: "13px",
                 }}
               >
@@ -174,8 +174,8 @@ export default function NotificationDropdown({ user }) {
                   onClick={() => !item.read && markAsRead(item.id)}
                   style={{
                     padding: "12px 16px",
-                    borderBottom: "1px solid #F1F5F9",
-                    backgroundColor: item.read ? "#FFFFFF" : "#EFF6FF",
+                    borderBottom: "1px solid #27272A",
+                    backgroundColor: item.read ? "#18181B" : "rgba(59, 130, 246, 0.08)",
                     cursor: "pointer",
                     transition: "background-color 0.2s",
                   }}
@@ -185,16 +185,16 @@ export default function NotificationDropdown({ user }) {
                       style={{
                         fontSize: "12px",
                         fontWeight: 600,
-                        color: item.read ? "#334155" : "#1E40AF",
+                        color: item.read ? "#FAFAFA" : "#93C5FD",
                       }}
                     >
                       {item.title}
                     </span>
-                    <span style={{ fontSize: "10px", color: "#94A3B8" }}>
+                    <span style={{ fontSize: "10px", color: "#71717A" }}>
                       {item.createdAt ? new Date(item.createdAt).toLocaleDateString() : ""}
                     </span>
                   </div>
-                  <p style={{ fontSize: "12px", color: "#475569", margin: 0, lineHeight: 1.4 }}>
+                  <p style={{ fontSize: "12px", color: "#A1A1AA", margin: 0, lineHeight: 1.4 }}>
                     {item.message}
                   </p>
                 </div>

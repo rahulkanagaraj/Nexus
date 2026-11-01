@@ -1,23 +1,22 @@
 import React, { useState } from "react";
-import { Sparkles, RefreshCw, Award, ShieldAlert, Cpu, Rocket, ChevronDown, ChevronUp, FileText } from "lucide-react";
+import { Sparkles, RefreshCw, Award, ChevronDown, ChevronUp } from "lucide-react";
 import axios from "axios";
 
 export default function AiInsightsCard({ project, onProjectUpdated, onOpenPatentStudio }) {
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading]     = useState(false);
   const [collapsed, setCollapsed] = useState(false);
-  const [msg, setMsg] = useState(null);
+  const [msg, setMsg]             = useState(null);
 
   if (!project) return null;
 
+  // ── API CALL (unchanged) ──────────────────────────────────────────────────
   const handleRefreshInsights = async () => {
     try {
       setLoading(true);
       setMsg(null);
       const res = await axios.post(`/api/projects/${project.id}/ai-insights`);
       if (res.data && res.data.project) {
-        if (onProjectUpdated) {
-          onProjectUpdated(res.data.project);
-        }
+        if (onProjectUpdated) onProjectUpdated(res.data.project);
         setMsg("✓ High-depth AI evaluation updated!");
         setTimeout(() => setMsg(null), 3500);
       }
@@ -29,9 +28,8 @@ export default function AiInsightsCard({ project, onProjectUpdated, onOpenPatent
     }
   };
 
+  // ── Markdown parser (unchanged) ───────────────────────────────────────────
   const rawSummary = project.summary || "";
-
-  // Parse structured sections from markdown if present
   const parseMarkdownSections = (text) => {
     if (!text) return [];
     const parts = text.split(/###\s+/);
@@ -41,97 +39,90 @@ export default function AiInsightsCard({ project, onProjectUpdated, onOpenPatent
       if (!trimmed) return;
       const firstLineBreak = trimmed.indexOf("\n");
       if (firstLineBreak > -1) {
-        const title = trimmed.substring(0, firstLineBreak).trim();
-        const body = trimmed.substring(firstLineBreak).trim();
-        sections.push({ title, body });
+        sections.push({ title: trimmed.substring(0, firstLineBreak).trim(), body: trimmed.substring(firstLineBreak).trim() });
       } else {
         sections.push({ title: "Analysis", body: trimmed });
       }
     });
     return sections;
   };
-
   const sections = parseMarkdownSections(rawSummary);
 
   return (
     <div
       style={{
-        border: "1px solid #C7D2FE",
-        boxShadow: "0 4px 16px rgba(99, 102, 241, 0.08)",
-        background: "linear-gradient(180deg, #F5F3FF 0%, #EEF2FF 100%)",
-        borderRadius: "14px",
-        padding: "18px 20px",
+        border: "1px solid #27272A",
+        backgroundColor: "#18181B",
+        borderRadius: "12px",
+        padding: "16px 20px",
         marginBottom: "20px",
-        position: "relative",
       }}
     >
-      {/* Header Bar */}
+      {/* ── Header ─────────────────────────────────────────────────────────── */}
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "12px" }}>
-        <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+        <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
           <div
             style={{
-              width: "32px",
-              height: "32px",
-              borderRadius: "10px",
-              backgroundColor: "#4F46E5",
+              width: "30px",
+              height: "30px",
+              borderRadius: "8px",
+              backgroundColor: "#3B82F6",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              color: "#FFFFFF",
-              boxShadow: "0 2px 6px rgba(79, 70, 229, 0.3)",
             }}
           >
-            <Sparkles size={18} />
+            <Sparkles size={16} color="#FFFFFF" />
           </div>
           <div>
             <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-              <h4 style={{ margin: 0, fontSize: "15px", fontWeight: 700, color: "#1E1B4B" }}>
+              <h4 style={{ margin: 0, fontSize: "14px", fontWeight: 700, color: "#FAFAFA" }}>
                 AI Research &amp; Patentability Insights
               </h4>
               <span
                 style={{
-                  fontSize: "11px",
-                  fontWeight: 700,
-                  color: "#4338CA",
-                  backgroundColor: "#E0E7FF",
+                  fontSize: "10px",
+                  fontWeight: 600,
+                  color: "#3B82F6",
+                  backgroundColor: "rgba(59,130,246,0.1)",
                   padding: "2px 8px",
                   borderRadius: "9999px",
-                  border: "1px solid #C7D2FE",
+                  border: "1px solid rgba(59,130,246,0.2)",
                 }}
               >
-                ✨ Deep Analytical Engine
+                Deep Analytical Engine
               </span>
             </div>
-            <p style={{ margin: 0, fontSize: "12px", color: "#6366F1" }}>
-              Comprehensive evaluation of research novelty, methodology &amp; IP viability
+            <p style={{ margin: 0, fontSize: "12px", color: "#71717A" }}>
+              Novelty, methodology &amp; IP viability evaluation
             </p>
           </div>
         </div>
 
         <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+          {/* Re-Analyze button — triggers POST /api/projects/{id}/ai-insights */}
           <button
             onClick={handleRefreshInsights}
             disabled={loading}
-            title="Re-run deep AI evaluation"
             style={{
               padding: "6px 12px",
               borderRadius: "8px",
-              border: "1px solid #C7D2FE",
-              backgroundColor: "#FFFFFF",
-              color: "#4338CA",
+              border: "1px solid #27272A",
+              backgroundColor: "#09090B",
+              color: loading ? "#52525B" : "#A1A1AA",
               fontSize: "12px",
               fontWeight: 600,
               cursor: loading ? "not-allowed" : "pointer",
               display: "flex",
               alignItems: "center",
               gap: "6px",
-              boxShadow: "0 1px 2px rgba(0,0,0,0.05)",
             }}
           >
-            <RefreshCw size={13} className={loading ? "spin" : ""} />
+            <RefreshCw size={12} className={loading ? "spin" : ""} />
             {loading ? "Analyzing..." : "Re-Analyze"}
           </button>
 
+          {/* Patent Studio button */}
           {onOpenPatentStudio && (
             <button
               onClick={() => onOpenPatentStudio(project)}
@@ -139,7 +130,7 @@ export default function AiInsightsCard({ project, onProjectUpdated, onOpenPatent
                 padding: "6px 12px",
                 borderRadius: "8px",
                 border: "none",
-                backgroundColor: "#4F46E5",
+                backgroundColor: "#8B5CF6",
                 color: "#FFFFFF",
                 fontSize: "12px",
                 fontWeight: 600,
@@ -147,35 +138,31 @@ export default function AiInsightsCard({ project, onProjectUpdated, onOpenPatent
                 display: "flex",
                 alignItems: "center",
                 gap: "5px",
-                boxShadow: "0 2px 4px rgba(79, 70, 229, 0.2)",
               }}
             >
-              <Award size={13} />
+              <Award size={12} />
               Patent Studio
             </button>
           )}
 
+          {/* Collapse toggle */}
           <button
             onClick={() => setCollapsed(!collapsed)}
-            style={{
-              background: "none",
-              border: "none",
-              cursor: "pointer",
-              color: "#64748B",
-              padding: "4px",
-            }}
+            style={{ background: "none", border: "none", cursor: "pointer", color: "#52525B", padding: "4px" }}
           >
-            {collapsed ? <ChevronDown size={18} /> : <ChevronUp size={18} />}
+            {collapsed ? <ChevronDown size={16} /> : <ChevronUp size={16} />}
           </button>
         </div>
       </div>
 
+      {/* ── Status message ─────────────────────────────────────────────────── */}
       {msg && (
         <div
           style={{
             fontSize: "12px",
-            color: msg.startsWith("✓") ? "#15803D" : "#B91C1C",
-            backgroundColor: msg.startsWith("✓") ? "#DCFCE7" : "#FEE2E2",
+            color: msg.startsWith("✓") ? "#4ADE80" : "#F87171",
+            backgroundColor: msg.startsWith("✓") ? "rgba(74,222,128,0.08)" : "rgba(248,113,113,0.08)",
+            border: `1px solid ${msg.startsWith("✓") ? "rgba(74,222,128,0.2)" : "rgba(248,113,113,0.2)"}`,
             padding: "6px 12px",
             borderRadius: "6px",
             marginBottom: "10px",
@@ -186,47 +173,29 @@ export default function AiInsightsCard({ project, onProjectUpdated, onOpenPatent
         </div>
       )}
 
-      {/* Body Content */}
+      {/* ── Body ───────────────────────────────────────────────────────────── */}
       {!collapsed && (
-        <div style={{ marginTop: "10px" }}>
+        <div style={{ marginTop: "8px" }}>
           {!rawSummary ? (
-            <div style={{ textAlign: "center", padding: "16px 0", color: "#64748B", fontSize: "13px" }}>
+            <div style={{ textAlign: "center", padding: "20px 0", color: "#52525B", fontSize: "13px" }}>
               No AI evaluation generated yet. Click "Re-Analyze" to evaluate this research proposal.
             </div>
           ) : sections.length > 1 ? (
-            <div style={{ display: "grid", gridTemplateColumns: "1fr", gap: "12px" }}>
+            <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
               {sections.map((sec, idx) => (
                 <div
                   key={idx}
                   style={{
-                    backgroundColor: "#FFFFFF",
-                    border: "1px solid #E0E7FF",
-                    borderRadius: "10px",
-                    padding: "12px 16px",
-                    boxShadow: "0 1px 3px rgba(0,0,0,0.02)",
+                    backgroundColor: "#09090B",
+                    border: "1px solid #27272A",
+                    borderRadius: "8px",
+                    padding: "12px 14px",
                   }}
                 >
-                  <div
-                    style={{
-                      fontSize: "13px",
-                      fontWeight: 700,
-                      color: "#1E1B4B",
-                      marginBottom: "6px",
-                      display: "flex",
-                      alignItems: "center",
-                      gap: "6px",
-                    }}
-                  >
+                  <div style={{ fontSize: "13px", fontWeight: 700, color: "#FAFAFA", marginBottom: "6px" }}>
                     {sec.title}
                   </div>
-                  <div
-                    style={{
-                      fontSize: "13px",
-                      lineHeight: 1.6,
-                      color: "#334155",
-                      whiteSpace: "pre-line",
-                    }}
-                  >
+                  <div style={{ fontSize: "13px", lineHeight: 1.6, color: "#A1A1AA", whiteSpace: "pre-line" }}>
                     {sec.body}
                   </div>
                 </div>
@@ -235,13 +204,13 @@ export default function AiInsightsCard({ project, onProjectUpdated, onOpenPatent
           ) : (
             <div
               style={{
-                backgroundColor: "#FFFFFF",
-                borderRadius: "10px",
-                padding: "14px 16px",
+                backgroundColor: "#09090B",
+                border: "1px solid #27272A",
+                borderRadius: "8px",
+                padding: "14px",
                 fontSize: "13px",
                 lineHeight: 1.6,
-                color: "#1E293B",
-                border: "1px solid #E0E7FF",
+                color: "#A1A1AA",
               }}
             >
               {rawSummary}

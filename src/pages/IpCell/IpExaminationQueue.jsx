@@ -171,64 +171,76 @@ export default function IpExaminationQueue() {
     }
   };
 
-  // Status Badge Helper: Solid colorful rounded pill buttons (borderRadius: "20px", white text, zero emojis)
+  // Status Badge Helper: Clean Academic Dark pill badge
   const renderStatusBadge = (project) => {
     const linkedFiling = ipFilings.find((f) => String(f.projectId) === String(project.id));
     const status = linkedFiling ? linkedFiling.filingStatus : project.status;
 
-    let bgColor = "#2563EB";
-    let text = "Pending Examination";
+    let bg = "rgba(59, 130, 246, 0.15)";
+    let border = "#3B82F6";
+    let text = "#93C5FD";
+    let label = "Pending Examination";
 
     if (status === "GRANTED") {
-      bgColor = "#059669";
-      text = "Patent Granted";
+      bg = "rgba(16, 185, 129, 0.15)";
+      border = "#10B981";
+      text = "#6EE7B7";
+      label = "Patent Granted";
     } else if (status === "IP_FILED" || status === "FILED") {
-      bgColor = "#2563EB";
-      text = "Application Filed";
+      bg = "rgba(59, 130, 246, 0.15)";
+      border = "#3B82F6";
+      text = "#93C5FD";
+      label = "Application Filed";
     } else if (status === "UNDER_EXAMINATION") {
-      bgColor = "#7C3AED";
-      text = "Under Examination";
+      bg = "rgba(139, 92, 246, 0.15)";
+      border = "#8B5CF6";
+      text = "#C4B5FD";
+      label = "Under Examination";
     } else if (status === "REVISION_REQUESTED") {
-      bgColor = "#DC2626";
-      text = "Revision Requested";
+      bg = "rgba(239, 68, 68, 0.15)";
+      border = "#EF4444";
+      text = "#FCA5A5";
+      label = "Revision Requested";
     } else if (status === "READY_FOR_IP") {
-      bgColor = "#6366F1";
-      text = "Patent Eligible";
+      bg = "rgba(99, 102, 241, 0.15)";
+      border = "#6366F1";
+      text = "#A5B4FC";
+      label = "Patent Eligible";
     }
 
     return (
       <span
         style={{
-          backgroundColor: bgColor,
-          color: "#FFFFFF",
+          backgroundColor: bg,
+          color: text,
+          border: `1px solid ${border}`,
           padding: "4px 14px",
-          borderRadius: "20px",
+          borderRadius: "9999px",
           fontSize: "12px",
-          fontWeight: 700,
+          fontWeight: 600,
           display: "inline-block",
           whiteSpace: "nowrap",
           letterSpacing: "0.2px",
-          boxShadow: "0 1px 3px rgba(0, 0, 0, 0.1)",
         }}
       >
-        {text}
+        {label}
       </span>
     );
   };
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", minHeight: "100vh", backgroundColor: "#F5F7FC" }}>
+    <div style={{ display: "flex", flexDirection: "column", minHeight: "100vh", backgroundColor: "#09090B", color: "#FAFAFA" }}>
       <Navbar />
 
       <div style={{ display: "flex", flex: 1 }}>
         <Sidebar />
 
         <main style={{ flex: 1, padding: "28px 36px", width: "100%", boxSizing: "border-box", overflowX: "hidden" }}>
-          {/* Header Title - Clean sharp title, no long wordy paragraph description */}
+          {/* Header Title */}
           <div style={{ marginBottom: "24px", display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "16px" }}>
             <div>
-              <h1 style={{ margin: 0, fontSize: "28px", fontWeight: 700, color: "#0F172A", fontFamily: "'Poppins', sans-serif" }}>
-                IP Examination & Approval Queue
+              <h1 style={{ margin: 0, fontSize: "24px", fontWeight: 700, color: "#FAFAFA", fontFamily: "'Poppins', sans-serif" }}>
+                IP Examination &amp; Approval Queue
               </h1>
             </div>
 
@@ -240,13 +252,12 @@ export default function IpExaminationQueue() {
                 gap: "8px",
                 padding: "8px 16px",
                 borderRadius: "10px",
-                backgroundColor: "#FFFFFF",
-                border: "1px solid #E2E8F0",
-                color: "#475569",
+                backgroundColor: "#18181B",
+                border: "1px solid #27272A",
+                color: "#FAFAFA",
                 fontWeight: 600,
                 fontSize: "0.875rem",
                 cursor: "pointer",
-                boxShadow: "0 1px 2px rgba(0,0,0,0.05)",
                 transition: "all 0.2s ease"
               }}
             >
@@ -264,50 +275,50 @@ export default function IpExaminationQueue() {
               marginBottom: "28px"
             }}
           >
-            <div style={{ backgroundColor: "#FFFFFF", borderRadius: "16px", padding: "20px", border: "1px solid #E2E8F0", boxShadow: "0 1px 3px rgba(0,0,0,0.05)" }}>
+            <div style={{ backgroundColor: "#18181B", borderRadius: "16px", padding: "20px", border: "1px solid #27272A" }}>
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-                <span style={{ color: "#64748B", fontSize: "0.85rem", fontWeight: 600 }}>Ready For Filing</span>
-                <div style={{ width: "36px", height: "36px", borderRadius: "10px", backgroundColor: "#EFF6FF", color: "#2563EB", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                <span style={{ color: "#A1A1AA", fontSize: "0.85rem", fontWeight: 600 }}>Ready For Filing</span>
+                <div style={{ width: "36px", height: "36px", borderRadius: "10px", backgroundColor: "#27272A", color: "#3B82F6", display: "flex", alignItems: "center", justifyContent: "center" }}>
                   <ShieldCheck size={20} />
                 </div>
               </div>
-              <div style={{ fontSize: "1.75rem", fontWeight: 700, color: "#0F172A", marginTop: "8px" }}>
+              <div style={{ fontSize: "1.75rem", fontWeight: 700, color: "#FAFAFA", marginTop: "8px" }}>
                 {projects.filter((p) => p.status === "READY_FOR_IP" || p.status === "APPROVED").length}
               </div>
             </div>
 
-            <div style={{ backgroundColor: "#FFFFFF", borderRadius: "16px", padding: "20px", border: "1px solid #E2E8F0", boxShadow: "0 1px 3px rgba(0,0,0,0.05)" }}>
+            <div style={{ backgroundColor: "#18181B", borderRadius: "16px", padding: "20px", border: "1px solid #27272A" }}>
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-                <span style={{ color: "#64748B", fontSize: "0.85rem", fontWeight: 600 }}>Under Examination</span>
-                <div style={{ width: "36px", height: "36px", borderRadius: "10px", backgroundColor: "#F3E8FF", color: "#7C3AED", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                <span style={{ color: "#A1A1AA", fontSize: "0.85rem", fontWeight: 600 }}>Under Examination</span>
+                <div style={{ width: "36px", height: "36px", borderRadius: "10px", backgroundColor: "#27272A", color: "#8B5CF6", display: "flex", alignItems: "center", justifyContent: "center" }}>
                   <Clock size={20} />
                 </div>
               </div>
-              <div style={{ fontSize: "1.75rem", fontWeight: 700, color: "#0F172A", marginTop: "8px" }}>
+              <div style={{ fontSize: "1.75rem", fontWeight: 700, color: "#FAFAFA", marginTop: "8px" }}>
                 {ipFilings.filter((f) => f.filingStatus === "UNDER_EXAMINATION").length}
               </div>
             </div>
 
-            <div style={{ backgroundColor: "#FFFFFF", borderRadius: "16px", padding: "20px", border: "1px solid #E2E8F0", boxShadow: "0 1px 3px rgba(0,0,0,0.05)" }}>
+            <div style={{ backgroundColor: "#18181B", borderRadius: "16px", padding: "20px", border: "1px solid #27272A" }}>
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-                <span style={{ color: "#64748B", fontSize: "0.85rem", fontWeight: 600 }}>Patents Filed / Granted</span>
-                <div style={{ width: "36px", height: "36px", borderRadius: "10px", backgroundColor: "#ECFDF5", color: "#059669", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                <span style={{ color: "#A1A1AA", fontSize: "0.85rem", fontWeight: 600 }}>Patents Filed / Granted</span>
+                <div style={{ width: "36px", height: "36px", borderRadius: "10px", backgroundColor: "#27272A", color: "#10B981", display: "flex", alignItems: "center", justifyContent: "center" }}>
                   <Award size={20} />
                 </div>
               </div>
-              <div style={{ fontSize: "1.75rem", fontWeight: 700, color: "#0F172A", marginTop: "8px" }}>
+              <div style={{ fontSize: "1.75rem", fontWeight: 700, color: "#FAFAFA", marginTop: "8px" }}>
                 {ipFilings.filter((f) => f.filingStatus === "FILED" || f.filingStatus === "GRANTED").length}
               </div>
             </div>
 
-            <div style={{ backgroundColor: "#FFFFFF", borderRadius: "16px", padding: "20px", border: "1px solid #E2E8F0", boxShadow: "0 1px 3px rgba(0,0,0,0.05)" }}>
+            <div style={{ backgroundColor: "#18181B", borderRadius: "16px", padding: "20px", border: "1px solid #27272A" }}>
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-                <span style={{ color: "#64748B", fontSize: "0.85rem", fontWeight: 600 }}>Avg. Novelty Index</span>
-                <div style={{ width: "36px", height: "36px", borderRadius: "10px", backgroundColor: "#FEF3C7", color: "#D97706", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                <span style={{ color: "#A1A1AA", fontSize: "0.85rem", fontWeight: 600 }}>Avg. Novelty Index</span>
+                <div style={{ width: "36px", height: "36px", borderRadius: "10px", backgroundColor: "#27272A", color: "#F59E0B", display: "flex", alignItems: "center", justifyContent: "center" }}>
                   <Sparkles size={20} />
                 </div>
               </div>
-              <div style={{ fontSize: "1.75rem", fontWeight: 700, color: "#0F172A", marginTop: "8px" }}>
+              <div style={{ fontSize: "1.75rem", fontWeight: 700, color: "#FAFAFA", marginTop: "8px" }}>
                 92.4%
               </div>
             </div>
@@ -316,10 +327,10 @@ export default function IpExaminationQueue() {
           {/* Filter Bar & Search */}
           <div
             style={{
-              backgroundColor: "#FFFFFF",
+              backgroundColor: "#18181B",
               borderRadius: "16px",
               padding: "16px 24px",
-              border: "1px solid #E2E8F0",
+              border: "1px solid #27272A",
               marginBottom: "24px",
               display: "flex",
               justifyContent: "space-between",
@@ -342,9 +353,9 @@ export default function IpExaminationQueue() {
                   style={{
                     padding: "8px 16px",
                     borderRadius: "10px",
-                    border: selectedStatusFilter === tab.key ? "1px solid #7C3AED" : "1px solid #E2E8F0",
-                    backgroundColor: selectedStatusFilter === tab.key ? "#F3E8FF" : "#FFFFFF",
-                    color: selectedStatusFilter === tab.key ? "#7C3AED" : "#64748B",
+                    border: selectedStatusFilter === tab.key ? "1px solid #8B5CF6" : "1px solid #27272A",
+                    backgroundColor: selectedStatusFilter === tab.key ? "rgba(139, 92, 246, 0.15)" : "#09090B",
+                    color: selectedStatusFilter === tab.key ? "#C4B5FD" : "#A1A1AA",
                     fontWeight: 600,
                     fontSize: "0.85rem",
                     cursor: "pointer",
@@ -364,15 +375,15 @@ export default function IpExaminationQueue() {
                 style={{
                   padding: "8px 12px",
                   borderRadius: "10px",
-                  border: "1px solid #CBD5E1",
-                  backgroundColor: "#FFFFFF",
-                  color: "#334155",
+                  border: "1px solid #27272A",
+                  backgroundColor: "#09090B",
+                  color: "#FAFAFA",
                   fontSize: "0.85rem",
                   fontWeight: 500,
                   outline: "none"
                 }}
               >
-                <option value="ALL">All</option>
+                <option value="ALL">All Departments</option>
                 <option value="CSE">CSE</option>
                 <option value="AI&DS">AI&DS</option>
                 <option value="AI&ML">AI&ML</option>
@@ -383,7 +394,7 @@ export default function IpExaminationQueue() {
               </select>
 
               <div style={{ position: "relative", minWidth: "220px" }}>
-                <Search size={16} style={{ position: "absolute", left: "12px", top: "50%", transform: "translateY(-50%)", color: "#94A3B8" }} />
+                <Search size={16} style={{ position: "absolute", left: "12px", top: "50%", transform: "translateY(-50%)", color: "#71717A" }} />
                 <input
                   type="text"
                   placeholder="Search student, title..."
@@ -393,7 +404,9 @@ export default function IpExaminationQueue() {
                     width: "100%",
                     padding: "8px 12px 8px 36px",
                     borderRadius: "10px",
-                    border: "1px solid #CBD5E1",
+                    border: "1px solid #27272A",
+                    backgroundColor: "#09090B",
+                    color: "#FAFAFA",
                     fontSize: "0.85rem",
                     outline: "none"
                   }}
@@ -404,23 +417,23 @@ export default function IpExaminationQueue() {
 
           {/* Student Cards Grid */}
           {loading ? (
-            <div style={{ textAlign: "center", padding: "60px 0", color: "#64748B" }}>
+            <div style={{ textAlign: "center", padding: "60px 0", color: "#A1A1AA" }}>
               <RefreshCw className="spin" size={32} style={{ marginBottom: "12px" }} />
               <div>Loading IP Examination Queue...</div>
             </div>
           ) : filteredProjects.length === 0 ? (
             <div
               style={{
-                backgroundColor: "#FFFFFF",
+                backgroundColor: "#18181B",
                 borderRadius: "16px",
                 padding: "48px 24px",
                 textAlign: "center",
-                border: "1px dashed #CBD5E1",
-                color: "#64748B"
+                border: "1px dashed #27272A",
+                color: "#A1A1AA"
               }}
             >
-              <ShieldCheck size={48} style={{ color: "#94A3B8", marginBottom: "12px" }} />
-              <h3 style={{ margin: "0 0 8px 0", color: "#334155", fontWeight: 600 }}>No Projects in Queue</h3>
+              <ShieldCheck size={48} style={{ color: "#3F3F46", marginBottom: "12px" }} />
+              <h3 style={{ margin: "0 0 8px 0", color: "#FAFAFA", fontWeight: 600 }}>No Projects in Queue</h3>
               <p style={{ margin: 0, fontSize: "0.9rem" }}>No research projects match your search or filter criteria.</p>
             </div>
           ) : (
@@ -440,11 +453,10 @@ export default function IpExaminationQueue() {
                   <div
                     key={p.id}
                     style={{
-                      backgroundColor: "#FFFFFF",
+                      backgroundColor: "#18181B",
                       borderRadius: "16px",
-                      border: "1px solid #E2E8F0",
+                      border: "1px solid #27272A",
                       padding: "20px",
-                      boxShadow: "0 2px 4px rgba(0,0,0,0.03)",
                       display: "flex",
                       flexDirection: "column",
                       justifyContent: "space-between",
@@ -458,8 +470,8 @@ export default function IpExaminationQueue() {
                           style={{
                             fontSize: "0.75rem",
                             fontWeight: 700,
-                            color: "#475569",
-                            backgroundColor: "#F1F5F9",
+                            color: "#A1A1AA",
+                            backgroundColor: "#27272A",
                             padding: "4px 10px",
                             borderRadius: "6px"
                           }}
@@ -475,41 +487,41 @@ export default function IpExaminationQueue() {
                           margin: "0 0 12px 0",
                           fontSize: "1.05rem",
                           fontWeight: 700,
-                          color: "#0F172A",
+                          color: "#FAFAFA",
                           lineHeight: 1.4
                         }}
                       >
                         {p.title}
                       </h3>
 
-                      {/* Student & Faculty Information - (Rule 6: name instead of student name, Rule 3: only lead) */}
-                      <div style={{ backgroundColor: "#F8FAFC", borderRadius: "12px", padding: "12px", marginBottom: "16px", fontSize: "0.85rem" }}>
+                      {/* Student & Faculty Information */}
+                      <div style={{ backgroundColor: "#09090B", borderRadius: "12px", border: "1px solid #27272A", padding: "12px", marginBottom: "16px", fontSize: "0.85rem" }}>
                         <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "6px" }}>
-                          <span style={{ color: "#64748B", fontWeight: 500 }}>Name:</span>
-                          <span style={{ color: "#0F172A", fontWeight: 700 }}>{p.studentName || "Aarav Sharma"}</span>
+                          <span style={{ color: "#A1A1AA", fontWeight: 500 }}>Name:</span>
+                          <span style={{ color: "#FAFAFA", fontWeight: 700 }}>{p.studentName || "Aarav Sharma"}</span>
                         </div>
                         <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "6px" }}>
-                          <span style={{ color: "#64748B", fontWeight: 500 }}>Guide:</span>
-                          <span style={{ color: "#334155", fontWeight: 600 }}>{p.facultyName || "Dr. Rajesh Kumar"}</span>
+                          <span style={{ color: "#A1A1AA", fontWeight: 500 }}>Guide:</span>
+                          <span style={{ color: "#FAFAFA", fontWeight: 600 }}>{p.facultyName || "Dr. Rajesh Kumar"}</span>
                         </div>
                         <div style={{ display: "flex", justifyContent: "space-between" }}>
-                          <span style={{ color: "#64748B", fontWeight: 500 }}>Domain:</span>
-                          <span style={{ color: "#7C3AED", fontWeight: 600 }}>{p.domain || "AI & Robotics"}</span>
+                          <span style={{ color: "#A1A1AA", fontWeight: 500 }}>Domain:</span>
+                          <span style={{ color: "#C4B5FD", fontWeight: 600 }}>{p.domain || "AI & Robotics"}</span>
                         </div>
                       </div>
 
                       {/* Progress Bar & AI Novelty Rating */}
                       <div style={{ marginBottom: "16px" }}>
                         <div style={{ display: "flex", justifyContent: "space-between", fontSize: "0.8rem", marginBottom: "6px" }}>
-                          <span style={{ color: "#64748B", fontWeight: 500 }}>Weekly Logs Progress</span>
-                          <span style={{ color: "#059669", fontWeight: 700 }}>{progressPct}% Completed</span>
+                          <span style={{ color: "#A1A1AA", fontWeight: 500 }}>Weekly Logs Progress</span>
+                          <span style={{ color: "#10B981", fontWeight: 700 }}>{progressPct}% Completed</span>
                         </div>
-                        <div style={{ height: "6px", backgroundColor: "#E2E8F0", borderRadius: "3px", overflow: "hidden" }}>
+                        <div style={{ height: "6px", backgroundColor: "#27272A", borderRadius: "3px", overflow: "hidden" }}>
                           <div
                             style={{
                               height: "100%",
                               width: `${progressPct}%`,
-                              backgroundColor: "#059669",
+                              backgroundColor: "#10B981",
                               borderRadius: "3px",
                               transition: "width 0.3s ease"
                             }}
@@ -525,8 +537,9 @@ export default function IpExaminationQueue() {
                           gap: "8px",
                           padding: "8px 12px",
                           borderRadius: "10px",
-                          backgroundColor: "#F3E8FF",
-                          color: "#7C3AED",
+                          backgroundColor: "rgba(139, 92, 246, 0.15)",
+                          border: "1px solid rgba(139, 92, 246, 0.3)",
+                          color: "#C4B5FD",
                           fontSize: "0.8rem",
                           fontWeight: 600,
                           marginBottom: "16px"
@@ -545,7 +558,7 @@ export default function IpExaminationQueue() {
                           flex: 1,
                           padding: "9px 14px",
                           borderRadius: "10px",
-                          backgroundColor: "#7C3AED",
+                          backgroundColor: "#8B5CF6",
                           color: "#FFFFFF",
                           border: "none",
                           fontWeight: 600,
@@ -555,7 +568,6 @@ export default function IpExaminationQueue() {
                           alignItems: "center",
                           justifyContent: "center",
                           gap: "4px",
-                          boxShadow: "0 2px 4px rgba(124, 58, 237, 0.25)",
                           transition: "all 0.2s ease"
                         }}
                       >
@@ -568,9 +580,9 @@ export default function IpExaminationQueue() {
                         style={{
                           padding: "9px 12px",
                           borderRadius: "10px",
-                          backgroundColor: "#F3E8FF",
-                          color: "#7C3AED",
-                          border: "1px solid #DDD6FE",
+                          backgroundColor: "#27272A",
+                          color: "#FAFAFA",
+                          border: "1px solid #3F3F46",
                           fontWeight: 700,
                           fontSize: "12px",
                           cursor: "pointer",
@@ -580,7 +592,7 @@ export default function IpExaminationQueue() {
                           gap: "4px",
                         }}
                       >
-                        <Sparkles size={14} />
+                        <Sparkles size={14} color="#C4B5FD" />
                         <span>Claims Studio</span>
                       </button>
                     </div>
@@ -596,8 +608,8 @@ export default function IpExaminationQueue() {
               style={{
                 position: "fixed",
                 inset: 0,
-                backgroundColor: "rgba(15, 23, 42, 0.6)",
-                backdropFilter: "blur(4px)",
+                backgroundColor: "rgba(0, 0, 0, 0.75)",
+                backdropFilter: "blur(6px)",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
@@ -607,59 +619,59 @@ export default function IpExaminationQueue() {
             >
               <div
                 style={{
-                  backgroundColor: "#FFFFFF",
+                  backgroundColor: "#18181B",
                   borderRadius: "20px",
                   width: "100%",
                   maxWidth: "760px",
                   maxHeight: "90vh",
                   overflowY: "auto",
-                  boxShadow: "0 20px 25px -5px rgba(0,0,0,0.1), 0 10px 10px -5px rgba(0,0,0,0.04)",
-                  border: "1px solid #E2E8F0"
+                  border: "1px solid #27272A",
+                  color: "#FAFAFA"
                 }}
               >
                 {/* Modal Header */}
-                <div style={{ padding: "24px 28px", borderBottom: "1px solid #E2E8F0", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                <div style={{ padding: "24px 28px", borderBottom: "1px solid #27272A", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
                   <div>
-                    <span style={{ fontSize: "0.75rem", fontWeight: 700, color: "#7C3AED", textTransform: "uppercase", letterSpacing: "0.5px" }}>
+                    <span style={{ fontSize: "0.75rem", fontWeight: 700, color: "#8B5CF6", textTransform: "uppercase", letterSpacing: "0.5px" }}>
                       Institutional IP Cell Examination
                     </span>
-                    <h2 style={{ margin: "4px 0 0 0", fontSize: "1.25rem", fontWeight: 700, color: "#0F172A" }}>
+                    <h2 style={{ margin: "4px 0 0 0", fontSize: "1.25rem", fontWeight: 700, color: "#FAFAFA" }}>
                       {selectedProject.title}
                     </h2>
                   </div>
                   <button
                     onClick={() => setSelectedProject(null)}
-                    style={{ background: "none", border: "none", cursor: "pointer", color: "#64748B", padding: "4px" }}
+                    style={{ background: "none", border: "none", cursor: "pointer", color: "#A1A1AA", padding: "4px" }}
                   >
                     <X size={20} />
                   </button>
                 </div>
 
                 {/* Modal Tab Switcher */}
-                <div style={{ display: "flex", borderBottom: "1px solid #E2E8F0", backgroundColor: "#F8FAFC", padding: "0 28px" }}>
+                <div style={{ display: "flex", borderBottom: "1px solid #27272A", backgroundColor: "#141416", padding: "0 28px" }}>
                   <button
                     onClick={() => setActiveTab("AI_NOVELTY")}
                     style={{
                       padding: "14px 20px",
                       border: "none",
-                      borderBottom: activeTab === "AI_NOVELTY" ? "2px solid #7C3AED" : "2px solid transparent",
+                      borderBottom: activeTab === "AI_NOVELTY" ? "2px solid #8B5CF6" : "2px solid transparent",
                       backgroundColor: "transparent",
-                      color: activeTab === "AI_NOVELTY" ? "#7C3AED" : "#64748B",
+                      color: activeTab === "AI_NOVELTY" ? "#C4B5FD" : "#A1A1AA",
                       fontWeight: 600,
                       fontSize: "0.9rem",
                       cursor: "pointer"
                     }}
                   >
-                    AI Prior-Art & Novelty Report
+                    AI Prior-Art &amp; Novelty Report
                   </button>
                   <button
                     onClick={() => setActiveTab("FILING_FORM")}
                     style={{
                       padding: "14px 20px",
                       border: "none",
-                      borderBottom: activeTab === "FILING_FORM" ? "2px solid #7C3AED" : "2px solid transparent",
+                      borderBottom: activeTab === "FILING_FORM" ? "2px solid #8B5CF6" : "2px solid transparent",
                       backgroundColor: "transparent",
-                      color: activeTab === "FILING_FORM" ? "#7C3AED" : "#64748B",
+                      color: activeTab === "FILING_FORM" ? "#C4B5FD" : "#A1A1AA",
                       fontWeight: 600,
                       fontSize: "0.9rem",
                       cursor: "pointer"
@@ -676,10 +688,10 @@ export default function IpExaminationQueue() {
                       {/* Novelty Score Highlight */}
                       <div
                         style={{
-                          backgroundColor: "#F3E8FF",
+                          backgroundColor: "#09090B",
                           borderRadius: "16px",
                           padding: "20px",
-                          border: "1px solid #DDD6FE",
+                          border: "1px solid #27272A",
                           marginBottom: "20px",
                           display: "flex",
                           alignItems: "center",
@@ -687,13 +699,13 @@ export default function IpExaminationQueue() {
                         }}
                       >
                         <div>
-                          <div style={{ fontSize: "0.85rem", color: "#6B21A8", fontWeight: 600 }}>Calculated Novelty Index</div>
-                          <div style={{ fontSize: "2rem", fontWeight: 800, color: "#581C87" }}>
+                          <div style={{ fontSize: "0.85rem", color: "#C4B5FD", fontWeight: 600 }}>Calculated Novelty Index</div>
+                          <div style={{ fontSize: "2rem", fontWeight: 800, color: "#FAFAFA" }}>
                             {selectedProject.summary?.includes("Novelty Score")
                               ? selectedProject.summary.match(/(\d+)%\s*Unique/)?.[0] || "93.4% Unique"
                               : "93.8% Unique"}
                           </div>
-                          <div style={{ fontSize: "0.8rem", color: "#7E22CE" }}>
+                          <div style={{ fontSize: "0.8rem", color: "#A1A1AA" }}>
                             Field: {selectedProject.domain || "Applied Computing"} • Verified non-obvious technical step
                           </div>
                         </div>
@@ -701,9 +713,10 @@ export default function IpExaminationQueue() {
                           <div
                             style={{
                               padding: "6px 14px",
-                              borderRadius: "20px",
-                              backgroundColor: "#059669",
-                              color: "#FFFFFF",
+                              borderRadius: "9999px",
+                              backgroundColor: "rgba(16, 185, 129, 0.15)",
+                              border: "1px solid #10B981",
+                              color: "#6EE7B7",
                               fontWeight: 700,
                               fontSize: "0.8rem"
                             }}
@@ -715,9 +728,9 @@ export default function IpExaminationQueue() {
                             style={{
                               padding: "6px 12px",
                               borderRadius: "8px",
-                              border: "1px solid #7C3AED",
-                              backgroundColor: "#FFFFFF",
-                              color: "#7C3AED",
+                              border: "1px solid #3F3F46",
+                              backgroundColor: "#27272A",
+                              color: "#FAFAFA",
                               fontWeight: 700,
                               fontSize: "12px",
                               cursor: "pointer",
@@ -726,7 +739,7 @@ export default function IpExaminationQueue() {
                               gap: "4px"
                             }}
                           >
-                            <Sparkles size={13} />
+                            <Sparkles size={13} color="#C4B5FD" />
                             Claims Studio
                           </button>
                         </div>
@@ -734,11 +747,11 @@ export default function IpExaminationQueue() {
 
                       {/* Novel Claims Summary */}
                       <div style={{ marginBottom: "20px" }}>
-                        <h4 style={{ margin: "0 0 10px 0", color: "#0F172A", fontWeight: 700, fontSize: "0.95rem" }}>
+                        <h4 style={{ margin: "0 0 10px 0", color: "#FAFAFA", fontWeight: 700, fontSize: "0.95rem" }}>
                           Identified Novel Technical Claims ({selectedProject.title})
                         </h4>
-                        <ul style={{ margin: 0, paddingLeft: "20px", color: "#334155", fontSize: "0.9rem", lineHeight: 1.6 }}>
-                          <li>Deterministic optimization architecture specifically engineered for <strong>{selectedProject.domain || "high-throughput computing"}</strong>.</li>
+                        <ul style={{ margin: 0, paddingLeft: "20px", color: "#A1A1AA", fontSize: "0.9rem", lineHeight: 1.6 }}>
+                          <li>Deterministic optimization architecture specifically engineered for <strong style={{ color: "#FAFAFA" }}>{selectedProject.domain || "high-throughput computing"}</strong>.</li>
                           <li>Localized telemetry ingestion interface with verified fault-tolerant error boundaries.</li>
                           <li>Empirically validated reproducible prototype architecture with low computational latency.</li>
                         </ul>
@@ -746,23 +759,23 @@ export default function IpExaminationQueue() {
 
                       {/* Prior Art Search Matches */}
                       <div style={{ marginBottom: "20px" }}>
-                        <h4 style={{ margin: "0 0 10px 0", color: "#0F172A", fontWeight: 700, fontSize: "0.95rem" }}>
+                        <h4 style={{ margin: "0 0 10px 0", color: "#FAFAFA", fontWeight: 700, fontSize: "0.95rem" }}>
                           Global Prior-Art Cross-Check ({selectedProject.domain || "Technology"} Domain)
                         </h4>
                         <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
-                          <div style={{ padding: "12px", borderRadius: "10px", border: "1px solid #E2E8F0", backgroundColor: "#F8FAFC", fontSize: "0.85rem" }}>
-                            <div style={{ fontWeight: "600", color: "#0F172A" }}>
+                          <div style={{ padding: "12px", borderRadius: "10px", border: "1px solid #27272A", backgroundColor: "#09090B", fontSize: "0.85rem" }}>
+                            <div style={{ fontWeight: "600", color: "#FAFAFA" }}>
                               US10928371B2 - Distributed Telemetry and Real-Time State Controller
                             </div>
-                            <div style={{ color: "#64748B", marginTop: "2px" }}>
+                            <div style={{ color: "#A1A1AA", marginTop: "2px" }}>
                               Overlap: 11.4% • Distinction: Distinct localized adaptive pipeline architecture.
                             </div>
                           </div>
-                          <div style={{ padding: "12px", borderRadius: "10px", border: "1px solid #E2E8F0", backgroundColor: "#F8FAFC", fontSize: "0.85rem" }}>
-                            <div style={{ fontWeight: "600", color: "#0F172A" }}>
+                          <div style={{ padding: "12px", borderRadius: "10px", border: "1px solid #27272A", backgroundColor: "#09090B", fontSize: "0.85rem" }}>
+                            <div style={{ fontWeight: "600", color: "#FAFAFA" }}>
                               IN202141049281A - Automated Consensus Framework for Mission-Critical Tasks
                             </div>
-                            <div style={{ color: "#64748B", marginTop: "2px" }}>
+                            <div style={{ color: "#A1A1AA", marginTop: "2px" }}>
                               Overlap: 8.2% • Distinction: Operates peer-to-peer without centralized master bottleneck.
                             </div>
                           </div>
@@ -772,8 +785,8 @@ export default function IpExaminationQueue() {
                       {/* Studio Launcher Banner */}
                       <div
                         style={{
-                          backgroundColor: "#EEF2FF",
-                          border: "1px solid #C7D2FE",
+                          backgroundColor: "#09090B",
+                          border: "1px solid #27272A",
                           borderRadius: "12px",
                           padding: "14px 18px",
                           display: "flex",
@@ -782,10 +795,10 @@ export default function IpExaminationQueue() {
                         }}
                       >
                         <div>
-                          <div style={{ fontSize: "13px", fontWeight: 700, color: "#312E81" }}>
+                          <div style={{ fontSize: "13px", fontWeight: 700, color: "#FAFAFA" }}>
                             Need Formal Patent Claims or IPO Form 2 Dossier?
                           </div>
-                          <div style={{ fontSize: "12px", color: "#4338CA" }}>
+                          <div style={{ fontSize: "12px", color: "#A1A1AA" }}>
                             Generate complete legal claims (Independent Claim 1 + Claims 2-5) and export PDF dossier.
                           </div>
                         </div>
@@ -794,7 +807,7 @@ export default function IpExaminationQueue() {
                           style={{
                             padding: "8px 16px",
                             borderRadius: "8px",
-                            backgroundColor: "#4F46E5",
+                            backgroundColor: "#3B82F6",
                             color: "#FFFFFF",
                             border: "none",
                             fontWeight: 700,
@@ -814,7 +827,7 @@ export default function IpExaminationQueue() {
                     <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
                       <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "16px" }}>
                         <div>
-                          <label style={{ display: "block", fontSize: "0.85rem", fontWeight: 600, color: "#334155", marginBottom: "6px" }}>
+                          <label style={{ display: "block", fontSize: "0.85rem", fontWeight: 600, color: "#FAFAFA", marginBottom: "6px" }}>
                             IP Protection Category
                           </label>
                           <select
@@ -824,20 +837,22 @@ export default function IpExaminationQueue() {
                               width: "100%",
                               padding: "10px 12px",
                               borderRadius: "10px",
-                              border: "1px solid #CBD5E1",
+                              border: "1px solid #27272A",
+                              backgroundColor: "#09090B",
+                              color: "#FAFAFA",
                               fontSize: "0.9rem",
                               outline: "none"
                             }}
                           >
                             <option value="PATENT">PATENT (Utility Invention)</option>
-                            <option value="COPYRIGHT">COPYRIGHT (Software & Code)</option>
+                            <option value="COPYRIGHT">COPYRIGHT (Software &amp; Code)</option>
                             <option value="INDUSTRIAL_DESIGN">INDUSTRIAL DESIGN (CAD Blueprint)</option>
                             <option value="TRADE_SECRET">TRADE SECRET</option>
                           </select>
                         </div>
 
                         <div>
-                          <label style={{ display: "block", fontSize: "0.85rem", fontWeight: 600, color: "#334155", marginBottom: "6px" }}>
+                          <label style={{ display: "block", fontSize: "0.85rem", fontWeight: 600, color: "#FAFAFA", marginBottom: "6px" }}>
                             Official Patent Application No.
                           </label>
                           <input
@@ -848,7 +863,9 @@ export default function IpExaminationQueue() {
                               width: "100%",
                               padding: "10px 12px",
                               borderRadius: "10px",
-                              border: "1px solid #CBD5E1",
+                              border: "1px solid #27272A",
+                              backgroundColor: "#09090B",
+                              color: "#FAFAFA",
                               fontSize: "0.9rem",
                               outline: "none",
                               fontWeight: 600
@@ -859,7 +876,7 @@ export default function IpExaminationQueue() {
 
                       <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "16px" }}>
                         <div>
-                          <label style={{ display: "block", fontSize: "0.85rem", fontWeight: 600, color: "#334155", marginBottom: "6px" }}>
+                          <label style={{ display: "block", fontSize: "0.85rem", fontWeight: 600, color: "#FAFAFA", marginBottom: "6px" }}>
                             Indian Patent Office Jurisdiction
                           </label>
                           <select
@@ -869,7 +886,9 @@ export default function IpExaminationQueue() {
                               width: "100%",
                               padding: "10px 12px",
                               borderRadius: "10px",
-                              border: "1px solid #CBD5E1",
+                              border: "1px solid #27272A",
+                              backgroundColor: "#09090B",
+                              color: "#FAFAFA",
                               fontSize: "0.9rem",
                               outline: "none"
                             }}
@@ -882,7 +901,7 @@ export default function IpExaminationQueue() {
                         </div>
 
                         <div>
-                          <label style={{ display: "block", fontSize: "0.85rem", fontWeight: 600, color: "#334155", marginBottom: "6px" }}>
+                          <label style={{ display: "block", fontSize: "0.85rem", fontWeight: 600, color: "#FAFAFA", marginBottom: "6px" }}>
                             Filing Submission Date
                           </label>
                           <input
@@ -893,7 +912,9 @@ export default function IpExaminationQueue() {
                               width: "100%",
                               padding: "10px 12px",
                               borderRadius: "10px",
-                              border: "1px solid #CBD5E1",
+                              border: "1px solid #27272A",
+                              backgroundColor: "#09090B",
+                              color: "#FAFAFA",
                               fontSize: "0.9rem",
                               outline: "none"
                             }}
@@ -902,8 +923,8 @@ export default function IpExaminationQueue() {
                       </div>
 
                       <div>
-                        <label style={{ display: "block", fontSize: "0.85rem", fontWeight: 600, color: "#334155", marginBottom: "6px" }}>
-                          Co-Inventors & Faculty Applicants
+                        <label style={{ display: "block", fontSize: "0.85rem", fontWeight: 600, color: "#FAFAFA", marginBottom: "6px" }}>
+                          Co-Inventors &amp; Faculty Applicants
                         </label>
                         <input
                           type="text"
@@ -913,7 +934,9 @@ export default function IpExaminationQueue() {
                             width: "100%",
                             padding: "10px 12px",
                             borderRadius: "10px",
-                            border: "1px solid #CBD5E1",
+                            border: "1px solid #27272A",
+                            backgroundColor: "#09090B",
+                            color: "#FAFAFA",
                             fontSize: "0.9rem",
                             outline: "none"
                           }}
@@ -921,8 +944,8 @@ export default function IpExaminationQueue() {
                       </div>
 
                       <div>
-                        <label style={{ display: "block", fontSize: "0.85rem", fontWeight: 600, color: "#334155", marginBottom: "6px" }}>
-                          IP Officer Technical Notes & Examiner Remarks
+                        <label style={{ display: "block", fontSize: "0.85rem", fontWeight: 600, color: "#FAFAFA", marginBottom: "6px" }}>
+                          IP Officer Technical Notes &amp; Examiner Remarks
                         </label>
                         <textarea
                           rows={3}
@@ -932,7 +955,9 @@ export default function IpExaminationQueue() {
                             width: "100%",
                             padding: "10px 12px",
                             borderRadius: "10px",
-                            border: "1px solid #CBD5E1",
+                            border: "1px solid #27272A",
+                            backgroundColor: "#09090B",
+                            color: "#FAFAFA",
                             fontSize: "0.9rem",
                             outline: "none",
                             resize: "vertical"
@@ -944,15 +969,15 @@ export default function IpExaminationQueue() {
                 </div>
 
                 {/* Modal Footer Actions */}
-                <div style={{ padding: "18px 28px", backgroundColor: "#F8FAFC", borderTop: "1px solid #E2E8F0", display: "flex", justifyContent: "flex-end", gap: "12px", borderRadius: "0 0 20px 20px" }}>
+                <div style={{ padding: "18px 28px", backgroundColor: "#141416", borderTop: "1px solid #27272A", display: "flex", justifyContent: "flex-end", gap: "12px", borderRadius: "0 0 20px 20px" }}>
                   <button
                     onClick={() => setSelectedProject(null)}
                     style={{
                       padding: "10px 18px",
                       borderRadius: "9999px",
-                      border: "1px solid #CBD5E1",
-                      backgroundColor: "#FFFFFF",
-                      color: "#475569",
+                      border: "1px solid #27272A",
+                      backgroundColor: "#27272A",
+                      color: "#A1A1AA",
                       fontWeight: 600,
                       fontSize: "13px",
                       cursor: "pointer"
@@ -967,9 +992,9 @@ export default function IpExaminationQueue() {
                     style={{
                       padding: "10px 18px",
                       borderRadius: "9999px",
-                      border: "1px solid #7C3AED",
-                      backgroundColor: "#F3E8FF",
-                      color: "#7C3AED",
+                      border: "1px solid #8B5CF6",
+                      backgroundColor: "rgba(139, 92, 246, 0.15)",
+                      color: "#C4B5FD",
                       fontWeight: 600,
                       fontSize: "13px",
                       cursor: "pointer"
@@ -985,12 +1010,11 @@ export default function IpExaminationQueue() {
                       padding: "10px 22px",
                       borderRadius: "9999px",
                       border: "none",
-                      backgroundColor: "#7C3AED",
+                      backgroundColor: "#3B82F6",
                       color: "#FFFFFF",
                       fontWeight: 600,
                       fontSize: "13px",
                       cursor: "pointer",
-                      boxShadow: "0 2px 6px rgba(124, 58, 237, 0.3)"
                     }}
                   >
                     {submitting ? "Submitting Filing..." : "Approve & Submit Patent Filing"}

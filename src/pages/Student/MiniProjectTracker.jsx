@@ -94,46 +94,46 @@ export default function MiniProjectTracker() {
   };
 
   return (
-    <div style={{ minHeight: "100vh", backgroundColor: "#F5F7FC", fontFamily: "'Poppins', sans-serif" }}>
+    <div style={{ minHeight: "100vh", backgroundColor: "#09090B", fontFamily: "'Poppins', sans-serif", color: "#FAFAFA" }}>
       <Navbar />
       <div style={{ display: "flex" }}>
         <Sidebar activeTab="mini-project" />
 
         <main style={{ flex: 1, padding: "28px 36px", width: "100%", boxSizing: "border-box" }}>
           {loading ? (
-            <p style={{ color: "#64748B" }}>Loading semester mini-project details...</p>
+            <p style={{ color: "#71717A" }}>Loading semester mini-project details...</p>
           ) : !project ? (
-            <div style={{ backgroundColor: "#FFFFFF", padding: "40px", borderRadius: "16px", textAlign: "center", border: "1px solid #E2E8F0" }}>
-              <Layers size={48} color="#94A3B8" style={{ marginBottom: "16px" }} />
-              <h2 style={{ fontSize: "20px", fontWeight: 700, color: "#0F172A" }}>No Mini-Project Allocated Yet</h2>
-              <p style={{ color: "#64748B", fontSize: "14px", maxWidth: "480px", margin: "8px auto 0 auto" }}>
+            <div style={{ backgroundColor: "#18181B", padding: "40px", borderRadius: "14px", textAlign: "center", border: "1px solid #27272A" }}>
+              <Layers size={48} color="#71717A" style={{ marginBottom: "16px" }} />
+              <h2 style={{ fontSize: "20px", fontWeight: 700, color: "#FAFAFA" }}>No Mini-Project Allocated Yet</h2>
+              <p style={{ color: "#71717A", fontSize: "14px", maxWidth: "480px", margin: "8px auto 0 auto" }}>
                 The Academic Office will allocate your semester capstone title and assign a Faculty Mentor shortly.
               </p>
             </div>
           ) : (
             <>
               {/* Project Header Card */}
-              <div style={{ backgroundColor: "#FFFFFF", padding: "28px", borderRadius: "16px", border: "1px solid #E2E8F0", marginBottom: "24px", boxShadow: "0 2px 4px rgba(0,0,0,0.02)" }}>
-                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: "16px" }}>
+              <div style={{ backgroundColor: "#18181B", padding: "28px", borderRadius: "14px", border: "1px solid #27272A", marginBottom: "24px" }}>
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: "16px", flexWrap: "wrap", gap: "12px" }}>
                   <div>
-                    <span style={{ backgroundColor: "#F3E8FF", color: "#7C3AED", fontSize: "11px", fontWeight: 700, padding: "4px 12px", borderRadius: "20px", textTransform: "uppercase" }}>
+                    <span style={{ backgroundColor: "rgba(139, 92, 246, 0.15)", color: "#8B5CF6", border: "1px solid rgba(139, 92, 246, 0.3)", fontSize: "11px", fontWeight: 700, padding: "4px 12px", borderRadius: "9999px", textTransform: "uppercase" }}>
                       {project.domain}
                     </span>
-                    <h1 style={{ fontSize: "24px", fontWeight: 700, color: "#0F172A", margin: "8px 0 4px 0" }}>
+                    <h1 style={{ fontSize: "22px", fontWeight: 800, color: "#FAFAFA", margin: "10px 0 6px 0" }}>
                       {project.title}
                     </h1>
-                    <p style={{ fontSize: "13px", color: "#64748B", margin: 0 }}>
-                      Faculty Mentor: <strong style={{ color: "#0F172A" }}>{project.faculty?.fullName}</strong> | Tech Stack: <span style={{ color: "#059669", fontWeight: 600 }}>{project.techStack}</span>
+                    <p style={{ fontSize: "13px", color: "#71717A", margin: 0 }}>
+                      Faculty Mentor: <strong style={{ color: "#FAFAFA" }}>{project.faculty?.fullName}</strong> | Tech Stack: <span style={{ color: "#10B981", fontWeight: 600 }}>{project.techStack}</span>
                     </p>
                   </div>
 
                   <button
                     onClick={() => setShowLogModal(true)}
                     style={{
-                      backgroundColor: "#7C3AED",
+                      backgroundColor: "#3B82F6",
                       color: "#FFFFFF",
                       padding: "10px 18px",
-                      borderRadius: "12px",
+                      borderRadius: "10px",
                       border: "none",
                       fontWeight: 600,
                       fontSize: "13px",
@@ -141,7 +141,6 @@ export default function MiniProjectTracker() {
                       alignItems: "center",
                       gap: "8px",
                       cursor: "pointer",
-                      boxShadow: "0 4px 12px rgba(124, 58, 237, 0.25)",
                     }}
                   >
                     <PlusCircle size={16} /> Submit Weekly Log
@@ -151,15 +150,16 @@ export default function MiniProjectTracker() {
                 {/* Overall Progress Bar */}
                 <div style={{ marginTop: "20px" }}>
                   <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "6px", fontSize: "13px", fontWeight: 600 }}>
-                    <span style={{ color: "#475569" }}>Semester Completion Progress</span>
-                    <span style={{ color: "#2563EB" }}>{project.overallProgress}%</span>
+                    <span style={{ color: "#A1A1AA" }}>Semester Completion Progress</span>
+                    <span style={{ color: "#3B82F6" }}>{project.overallProgress}%</span>
                   </div>
-                  <div style={{ height: "10px", backgroundColor: "#E2E8F0", borderRadius: "5px", overflow: "hidden" }}>
+                  <div style={{ height: "6px", backgroundColor: "#27272A", borderRadius: "9999px", overflow: "hidden" }}>
                     <div
                       style={{
                         height: "100%",
                         width: `${project.overallProgress}%`,
-                        background: "linear-gradient(90deg, #2563EB 0%, #059669 100%)",
+                        backgroundColor: "#3B82F6",
+                        borderRadius: "9999px",
                         transition: "width 0.4s ease",
                       }}
                     />
@@ -168,14 +168,14 @@ export default function MiniProjectTracker() {
               </div>
 
               {/* Deliverable Repository Links Card */}
-              <div style={{ backgroundColor: "#FFFFFF", padding: "24px", borderRadius: "16px", border: "1px solid #E2E8F0", marginBottom: "28px" }}>
-                <h2 style={{ fontSize: "16px", fontWeight: 700, color: "#1E293B", marginBottom: "16px", display: "flex", alignItems: "center", gap: "8px" }}>
-                  <Github size={18} color="#2563EB" /> Project Deliverable URLs (Unlocked Week 3+)
+              <div style={{ backgroundColor: "#18181B", padding: "24px", borderRadius: "14px", border: "1px solid #27272A", marginBottom: "28px" }}>
+                <h2 style={{ fontSize: "16px", fontWeight: 700, color: "#FAFAFA", marginBottom: "16px", display: "flex", alignItems: "center", gap: "8px" }}>
+                  <Github size={18} color="#3B82F6" /> Project Deliverable URLs (Unlocked Week 3+)
                 </h2>
 
                 <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "16px" }}>
                   <div>
-                    <label style={{ display: "block", fontSize: "12px", fontWeight: 600, color: "#475569", marginBottom: "4px" }}>
+                    <label style={{ display: "block", fontSize: "12px", fontWeight: 600, color: "#A1A1AA", marginBottom: "6px" }}>
                       GitHub Repository URL
                     </label>
                     <div style={{ display: "flex", gap: "8px" }}>
@@ -184,10 +184,10 @@ export default function MiniProjectTracker() {
                         placeholder="https://github.com/username/project"
                         value={githubUrl}
                         onChange={(e) => setGithubUrl(e.target.value)}
-                        style={{ flex: 1, padding: "8px 12px", borderRadius: "8px", border: "1px solid #CBD5E1", fontSize: "13px" }}
+                        style={{ flex: 1, padding: "9px 12px", borderRadius: "8px", border: "1px solid #27272A", backgroundColor: "#09090B", color: "#FAFAFA", fontSize: "13px", outline: "none" }}
                       />
                       {githubUrl && (
-                        <a href={githubUrl} target="_blank" rel="noopener noreferrer" style={{ padding: "8px 12px", backgroundColor: "#F1F5F9", borderRadius: "8px", color: "#334155", display: "flex", alignItems: "center" }}>
+                        <a href={githubUrl} target="_blank" rel="noopener noreferrer" style={{ padding: "9px 12px", backgroundColor: "#27272A", borderRadius: "8px", color: "#FAFAFA", display: "flex", alignItems: "center" }}>
                           <ExternalLink size={16} />
                         </a>
                       )}
@@ -195,7 +195,7 @@ export default function MiniProjectTracker() {
                   </div>
 
                   <div>
-                    <label style={{ display: "block", fontSize: "12px", fontWeight: 600, color: "#475569", marginBottom: "4px" }}>
+                    <label style={{ display: "block", fontSize: "12px", fontWeight: 600, color: "#A1A1AA", marginBottom: "6px" }}>
                       Live Prototype / Demo URL
                     </label>
                     <div style={{ display: "flex", gap: "8px" }}>
@@ -204,10 +204,10 @@ export default function MiniProjectTracker() {
                         placeholder="https://my-prototype.demo.app"
                         value={demoUrl}
                         onChange={(e) => setDemoUrl(e.target.value)}
-                        style={{ flex: 1, padding: "8px 12px", borderRadius: "8px", border: "1px solid #CBD5E1", fontSize: "13px" }}
+                        style={{ flex: 1, padding: "9px 12px", borderRadius: "8px", border: "1px solid #27272A", backgroundColor: "#09090B", color: "#FAFAFA", fontSize: "13px", outline: "none" }}
                       />
                       {demoUrl && (
-                        <a href={demoUrl} target="_blank" rel="noopener noreferrer" style={{ padding: "8px 12px", backgroundColor: "#F1F5F9", borderRadius: "8px", color: "#334155", display: "flex", alignItems: "center" }}>
+                        <a href={demoUrl} target="_blank" rel="noopener noreferrer" style={{ padding: "9px 12px", backgroundColor: "#27272A", borderRadius: "8px", color: "#FAFAFA", display: "flex", alignItems: "center" }}>
                           <ExternalLink size={16} />
                         </a>
                       )}
@@ -220,10 +220,10 @@ export default function MiniProjectTracker() {
                   disabled={savingLinks}
                   style={{
                     marginTop: "16px",
-                    backgroundColor: "#059669",
+                    backgroundColor: "#10B981",
                     color: "#FFFFFF",
                     padding: "8px 16px",
-                    borderRadius: "6px",
+                    borderRadius: "8px",
                     border: "none",
                     fontWeight: 600,
                     fontSize: "12px",
@@ -235,38 +235,39 @@ export default function MiniProjectTracker() {
               </div>
 
               {/* Weekly Logs Timeline */}
-              <div style={{ backgroundColor: "#FFFFFF", padding: "24px", borderRadius: "16px", border: "1px solid #E2E8F0" }}>
-                <h2 style={{ fontSize: "18px", fontWeight: 700, color: "#1E293B", marginBottom: "20px" }}>
+              <div style={{ backgroundColor: "#18181B", padding: "24px", borderRadius: "14px", border: "1px solid #27272A" }}>
+                <h2 style={{ fontSize: "16px", fontWeight: 700, color: "#FAFAFA", marginBottom: "20px" }}>
                   Weekly Progress Log History (Weeks 1 to 16)
                 </h2>
 
                 {logs.length === 0 ? (
-                  <p style={{ color: "#64748B", fontSize: "13px" }}>No weekly logs submitted yet. Click 'Submit Weekly Log' to add your first progress report.</p>
+                  <p style={{ color: "#71717A", fontSize: "13px" }}>No weekly logs submitted yet. Click 'Submit Weekly Log' to add your first progress report.</p>
                 ) : (
-                  <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
+                  <div style={{ display: "flex", flexDirection: "column", gap: "14px" }}>
                     {logs.map((log) => (
                       <div
                         key={log.id}
                         style={{
-                          border: "1px solid #E2E8F0",
-                          borderRadius: "12px",
-                          padding: "18px",
-                          backgroundColor: log.status === "APPROVED" ? "#F0FDF4" : log.status === "REVISION_REQUESTED" ? "#FEF2F2" : "#FFFFFF",
+                          border: "1px solid #27272A",
+                          borderRadius: "10px",
+                          padding: "16px",
+                          backgroundColor: "#09090B",
                         }}
                       >
                         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "8px" }}>
                           <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-                            <span style={{ fontSize: "14px", fontWeight: 700, color: "#1E293B" }}>
+                            <span style={{ fontSize: "14px", fontWeight: 700, color: "#FAFAFA" }}>
                               Week #{log.weekNumber} Report
                             </span>
                             <span
                               style={{
-                                backgroundColor: log.status === "APPROVED" ? "#DCFCE7" : log.status === "REVISION_REQUESTED" ? "#FECACA" : "#E0F2FE",
-                                color: log.status === "APPROVED" ? "#15803D" : log.status === "REVISION_REQUESTED" ? "#991B1B" : "#0369A1",
+                                backgroundColor: log.status === "APPROVED" ? "rgba(16, 185, 129, 0.15)" : log.status === "REVISION_REQUESTED" ? "rgba(239, 68, 68, 0.15)" : "rgba(59, 130, 246, 0.15)",
+                                color: log.status === "APPROVED" ? "#10B981" : log.status === "REVISION_REQUESTED" ? "#EF4444" : "#3B82F6",
+                                border: `1px solid ${log.status === "APPROVED" ? "rgba(16, 185, 129, 0.3)" : log.status === "REVISION_REQUESTED" ? "rgba(239, 68, 68, 0.3)" : "rgba(59, 130, 246, 0.3)"}`,
                                 fontSize: "11px",
                                 fontWeight: 700,
                                 padding: "2px 8px",
-                                borderRadius: "12px",
+                                borderRadius: "9999px",
                               }}
                             >
                               {log.status}
@@ -274,28 +275,28 @@ export default function MiniProjectTracker() {
                           </div>
 
                           {log.facultyRating && (
-                            <div style={{ display: "flex", alignItems: "center", gap: "4px", color: "#EAB308" }}>
+                            <div style={{ display: "flex", alignItems: "center", gap: "4px", color: "#F59E0B" }}>
                               {[...Array(log.facultyRating)].map((_, i) => (
-                                <Star key={i} size={14} fill="#EAB308" color="#EAB308" />
+                                <Star key={i} size={14} fill="#F59E0B" color="#F59E0B" />
                               ))}
                             </div>
                           )}
                         </div>
 
-                        <p style={{ fontSize: "13px", color: "#334155", margin: "0 0 10px 0", lineHeight: 1.5 }}>
+                        <p style={{ fontSize: "13px", color: "#A1A1AA", margin: "0 0 10px 0", lineHeight: 1.5 }}>
                           {log.workSummary}
                         </p>
 
                         {log.challenges && (
-                          <div style={{ fontSize: "12px", color: "#DC2626", marginBottom: "8px" }}>
+                          <div style={{ fontSize: "12px", color: "#EF4444", marginBottom: "8px" }}>
                             <strong>Challenges Faced:</strong> {log.challenges}
                           </div>
                         )}
 
                         {log.prototypeLink && (
-                          <div style={{ fontSize: "12px", color: "#2563EB", marginBottom: "8px" }}>
+                          <div style={{ fontSize: "12px", color: "#3B82F6", marginBottom: "8px" }}>
                             <strong>Prototype Deliverable:</strong>{" "}
-                            <a href={log.prototypeLink} target="_blank" rel="noopener noreferrer" style={{ color: "#2563EB", textDecoration: "underline" }}>
+                            <a href={log.prototypeLink} target="_blank" rel="noopener noreferrer" style={{ color: "#3B82F6", textDecoration: "underline" }}>
                               {log.prototypeLink}
                             </a>
                           </div>
@@ -306,26 +307,26 @@ export default function MiniProjectTracker() {
                           <div
                             style={{
                               marginTop: "12px",
-                              backgroundColor: "#F5F3FF",
-                              border: "1px solid #DDD6FE",
+                              backgroundColor: "rgba(139, 92, 246, 0.1)",
+                              border: "1px solid rgba(139, 92, 246, 0.25)",
                               padding: "10px 14px",
                               borderRadius: "8px",
                               fontSize: "12px",
-                              color: "#6D28D9",
+                              color: "#8B5CF6",
                               display: "flex",
                               alignItems: "center",
                               gap: "8px",
                             }}
                           >
-                            <Sparkles size={16} color="#7C3AED" />
+                            <Sparkles size={16} color="#8B5CF6" />
                             <span>{log.aiSummary}</span>
                           </div>
                         )}
 
                         {/* Faculty Feedback */}
                         {log.facultyFeedback && (
-                          <div style={{ marginTop: "10px", fontSize: "12px", backgroundColor: "#FFFFFF", border: "1px solid #CBD5E1", padding: "10px", borderRadius: "8px", color: "#334155" }}>
-                            <strong>Mentor Feedback ({project.faculty?.fullName}):</strong> {log.facultyFeedback}
+                          <div style={{ marginTop: "10px", fontSize: "12px", backgroundColor: "#18181B", border: "1px solid #27272A", padding: "10px 14px", borderRadius: "8px", color: "#A1A1AA" }}>
+                            <strong style={{ color: "#FAFAFA" }}>Mentor Feedback ({project.faculty?.fullName}):</strong> {log.facultyFeedback}
                           </div>
                         )}
                       </div>
@@ -343,7 +344,8 @@ export default function MiniProjectTracker() {
                     left: 0,
                     right: 0,
                     bottom: 0,
-                    backgroundColor: "rgba(15, 23, 42, 0.5)",
+                    backgroundColor: "rgba(0, 0, 0, 0.75)",
+                    backdropFilter: "blur(4px)",
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
@@ -352,31 +354,31 @@ export default function MiniProjectTracker() {
                 >
                   <div
                     style={{
-                      backgroundColor: "#FFFFFF",
-                      borderRadius: "16px",
+                      backgroundColor: "#18181B",
+                      borderRadius: "14px",
+                      border: "1px solid #27272A",
                       width: "100%",
                       maxWidth: "540px",
                       padding: "28px",
-                      boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.2)",
                     }}
                   >
-                    <h2 style={{ fontSize: "18px", fontWeight: 700, color: "#1E293B", marginBottom: "6px" }}>
+                    <h2 style={{ fontSize: "18px", fontWeight: 700, color: "#FAFAFA", marginBottom: "6px" }}>
                       Submit Weekly Progress Log
                     </h2>
-                    <p style={{ fontSize: "12px", color: "#64748B", marginBottom: "18px" }}>
+                    <p style={{ fontSize: "12px", color: "#71717A", marginBottom: "18px" }}>
                       Document your work done, hours spent, and link prototype artifacts.
                     </p>
 
                     <form onSubmit={handleWeeklyLogSubmit}>
                       <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "12px", marginBottom: "12px" }}>
                         <div>
-                          <label style={{ display: "block", fontSize: "12px", fontWeight: 600, color: "#334155", marginBottom: "4px" }}>
+                          <label style={{ display: "block", fontSize: "12px", fontWeight: 600, color: "#A1A1AA", marginBottom: "4px" }}>
                             Select Week Number
                           </label>
                           <select
                             value={selectedWeek}
                             onChange={(e) => setSelectedWeek(Number(e.target.value))}
-                            style={{ width: "100%", padding: "8px", borderRadius: "6px", border: "1px solid #CBD5E1", fontSize: "13px" }}
+                            style={{ width: "100%", padding: "8px 12px", borderRadius: "8px", border: "1px solid #27272A", backgroundColor: "#09090B", color: "#FAFAFA", fontSize: "13px" }}
                           >
                             {[...Array(16)].map((_, i) => (
                               <option key={i + 1} value={i + 1}>
@@ -387,7 +389,7 @@ export default function MiniProjectTracker() {
                         </div>
 
                         <div>
-                          <label style={{ display: "block", fontSize: "12px", fontWeight: 600, color: "#334155", marginBottom: "4px" }}>
+                          <label style={{ display: "block", fontSize: "12px", fontWeight: 600, color: "#A1A1AA", marginBottom: "4px" }}>
                             Hours Spent
                           </label>
                           <input
@@ -396,13 +398,13 @@ export default function MiniProjectTracker() {
                             max="60"
                             value={hoursSpent}
                             onChange={(e) => setHoursSpent(Number(e.target.value))}
-                            style={{ width: "100%", padding: "8px", borderRadius: "6px", border: "1px solid #CBD5E1", fontSize: "13px", boxSizing: "border-box" }}
+                            style={{ width: "100%", padding: "8px 12px", borderRadius: "8px", border: "1px solid #27272A", backgroundColor: "#09090B", color: "#FAFAFA", fontSize: "13px", boxSizing: "border-box" }}
                           />
                         </div>
                       </div>
 
                       <div style={{ marginBottom: "12px" }}>
-                        <label style={{ display: "block", fontSize: "12px", fontWeight: 600, color: "#334155", marginBottom: "4px" }}>
+                        <label style={{ display: "block", fontSize: "12px", fontWeight: 600, color: "#A1A1AA", marginBottom: "4px" }}>
                           Work Completed Summary *
                         </label>
                         <textarea
@@ -411,12 +413,12 @@ export default function MiniProjectTracker() {
                           value={workSummary}
                           onChange={(e) => setWorkSummary(e.target.value)}
                           placeholder="Describe technical progress, modules built, APIs created, test cases written..."
-                          style={{ width: "100%", padding: "8px", borderRadius: "6px", border: "1px solid #CBD5E1", fontSize: "13px", boxSizing: "border-box" }}
+                          style={{ width: "100%", padding: "8px 12px", borderRadius: "8px", border: "1px solid #27272A", backgroundColor: "#09090B", color: "#FAFAFA", fontSize: "13px", boxSizing: "border-box" }}
                         />
                       </div>
 
                       <div style={{ marginBottom: "12px" }}>
-                        <label style={{ display: "block", fontSize: "12px", fontWeight: 600, color: "#334155", marginBottom: "4px" }}>
+                        <label style={{ display: "block", fontSize: "12px", fontWeight: 600, color: "#A1A1AA", marginBottom: "4px" }}>
                           Challenges / Blockers Faced
                         </label>
                         <input
@@ -424,12 +426,12 @@ export default function MiniProjectTracker() {
                           value={challenges}
                           onChange={(e) => setChallenges(e.target.value)}
                           placeholder="e.g. CORS error on API endpoint, high memory usage"
-                          style={{ width: "100%", padding: "8px", borderRadius: "6px", border: "1px solid #CBD5E1", fontSize: "13px", boxSizing: "border-box" }}
+                          style={{ width: "100%", padding: "8px 12px", borderRadius: "8px", border: "1px solid #27272A", backgroundColor: "#09090B", color: "#FAFAFA", fontSize: "13px", boxSizing: "border-box" }}
                         />
                       </div>
 
                       <div style={{ marginBottom: "20px" }}>
-                        <label style={{ display: "block", fontSize: "12px", fontWeight: 600, color: "#334155", marginBottom: "4px" }}>
+                        <label style={{ display: "block", fontSize: "12px", fontWeight: 600, color: "#A1A1AA", marginBottom: "4px" }}>
                           Prototype / Deliverable Link {selectedWeek >= 3 ? "(Recommended for Week 3+)" : "(Optional)"}
                         </label>
                         <input
@@ -437,7 +439,7 @@ export default function MiniProjectTracker() {
                           value={prototypeLink}
                           onChange={(e) => setPrototypeLink(e.target.value)}
                           placeholder="https://github.com/org/repo or Live Demo URL"
-                          style={{ width: "100%", padding: "8px", borderRadius: "6px", border: "1px solid #CBD5E1", fontSize: "13px", boxSizing: "border-box" }}
+                          style={{ width: "100%", padding: "8px 12px", borderRadius: "8px", border: "1px solid #27272A", backgroundColor: "#09090B", color: "#FAFAFA", fontSize: "13px", boxSizing: "border-box" }}
                         />
                       </div>
 
@@ -445,14 +447,14 @@ export default function MiniProjectTracker() {
                         <button
                           type="button"
                           onClick={() => setShowLogModal(false)}
-                          style={{ padding: "8px 14px", borderRadius: "6px", border: "1px solid #CBD5E1", backgroundColor: "#FFFFFF", color: "#475569", fontSize: "13px", fontWeight: 600, cursor: "pointer" }}
+                          style={{ padding: "8px 14px", borderRadius: "8px", border: "1px solid #3F3F46", backgroundColor: "transparent", color: "#FAFAFA", fontSize: "13px", fontWeight: 600, cursor: "pointer" }}
                         >
                           Cancel
                         </button>
                         <button
                           type="submit"
                           disabled={submitting}
-                          style={{ padding: "8px 16px", borderRadius: "6px", border: "none", backgroundColor: "#4B5D8C", color: "#FFFFFF", fontSize: "13px", fontWeight: 600, cursor: "pointer" }}
+                          style={{ padding: "8px 16px", borderRadius: "8px", border: "none", backgroundColor: "#3B82F6", color: "#FFFFFF", fontSize: "13px", fontWeight: 600, cursor: "pointer" }}
                         >
                           {submitting ? "Submitting..." : "Submit Log & Run AI Check"}
                         </button>

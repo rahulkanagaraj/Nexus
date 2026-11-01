@@ -1,135 +1,56 @@
-/* Modern Light Theme CSS Variables & Global Styles */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap');
 
 :root {
-  /* Backgrounds */
-  --bg-main: #F6F9FC;
-  --bg-section: #EEF4F8;
-  --bg-card: #FFFFFF;
-
-  /* Accent System */
-  --primary-accent: #4B5D8C;
-  --primary-hover: #3F507A;
-  --light-accent: #E8EDF7;
-
-  /* Typography Colors */
-  --text-main: #1F2937;
-  --text-secondary: #64748B;
-  --text-muted: #94A3B8;
-
-  /* Borders */
-  --border-color: #D9E2EC;
-
-  /* Form Controls */
-  --input-bg: #F8FAFC;
-  --input-border: #CBD5E1;
-  --input-text: #1F2937;
-  --input-placeholder: #94A3B8;
-  --input-focus-border: #4B5D8C;
-  --input-focus-ring: rgba(75, 93, 140, 0.15);
+  --bg-app:    #09090B;
+  --bg-card:   #18181B;
+  --bg-input:  #09090B;
+  --border:    #27272A;
+  --border-hi: #3F3F46;
+  --text-1:    #FAFAFA;
+  --text-2:    #A1A1AA;
+  --text-3:    #71717A;
+  --text-4:    #52525B;
+  --blue:      #3B82F6;
+  --purple:    #8B5CF6;
+  --green:     #10B981;
+  --amber:     #F59E0B;
+  --red:       #EF4444;
 }
 
-body {
+*, *::before, *::after { box-sizing: border-box; }
+
+html, body, #root {
   margin: 0;
   padding: 0;
-  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  background-color: var(--bg-main);
-  color: var(--text-main);
-  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+  background-color: var(--bg-app);
+  color: var(--text-1);
+  font-family: 'Poppins', sans-serif;
+  color-scheme: dark;
 }
 
-/* Custom Scrollbars */
-::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
-}
-::-webkit-scrollbar-track {
-  background: #EEF4F8;
-}
-::-webkit-scrollbar-thumb {
-  background: #CBD5E1;
-  border-radius: 4px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: #94A3B8;
-}
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: var(--bg-app); }
+::-webkit-scrollbar-thumb { background: var(--border-hi); border-radius: 3px; }
 
-/* Global Form Controls (Inputs, Selects, Textareas) */
-input[type="text"],
-input[type="email"],
-input[type="password"],
-input[type="search"],
-select,
-textarea {
-  background-color: var(--input-bg) !important;
-  border: 1px solid var(--input-border) !important;
-  color: var(--input-text) !important;
-  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
-}
+/* Spin animation for loading icons */
+@keyframes spin { to { transform: rotate(360deg); } }
+.spin { animation: spin 1s linear infinite; }
 
-input::placeholder,
-textarea::placeholder {
-  color: var(--input-placeholder) !important;
+/* Form inputs global dark style */
+input, select, textarea {
+  background-color: var(--bg-input);
+  color: var(--text-1);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-family: 'Poppins', sans-serif;
 }
+input:focus, select:focus, textarea:focus {
+  outline: none;
+  border-color: var(--blue);
+}
+input::placeholder, textarea::placeholder { color: var(--text-4); }
 
-input:focus,
-select:focus,
-textarea:focus {
-  outline: none !important;
-  border-color: var(--input-focus-border) !important;
-  box-shadow: 0 0 0 3px var(--input-focus-ring) !important;
-}
-
-/* Textarea Specific Soft Styling */
-textarea {
-  background-color: #F8FAFC !important;
-  border: 1px solid #CBD5E1 !important;
-  border-radius: 8px !important;
-  padding: 10px 14px !important;
-  line-height: 1.5 !important;
-  font-size: 13px !important;
-}
-
-/* Clean Card Styling */
-.custom-card {
-  background: var(--bg-card);
-  border: 1px solid var(--border-color);
-  border-radius: 12px;
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.04);
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
-}
-
-.custom-card:hover {
-  border-color: #CBD5E1;
-  box-shadow: 0 4px 12px -2px rgba(0, 0, 0, 0.06);
-}
-
-/* Table Styling */
-.custom-table {
-  width: 100%;
-  border-collapse: separate;
-  border-spacing: 0;
-}
-
-.custom-table th {
-  background-color: var(--bg-section);
-  color: var(--text-secondary);
-  font-weight: 600;
-  font-size: 12px;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  padding: 12px 16px;
-  border-bottom: 1px solid var(--border-color);
-}
-
-.custom-table td {
-  padding: 14px 16px;
-  border-bottom: 1px solid #EEF4F8;
-  font-size: 13px;
-  color: var(--text-main);
-  vertical-align: middle;
-}
-
-.custom-table tr:hover td {
-  background-color: #F8FAFC;
-}
+button { font-family: 'Poppins', sans-serif; }
+a { color: var(--blue); }
