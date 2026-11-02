@@ -305,41 +305,32 @@ export default function LoginPage() {
               Quick Demo Fill Persona
             </span>
           </div>
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "6px", marginBottom: "8px" }}>
+          <div style={{ display: "flex", gap: "6px", flexWrap: "wrap" }}>
             {[
-              { key: "student", label: "Student (Aarav)", hint: "aarav.student@campus.edu", pass: "student123" },
-              { key: "faculty", label: "Mentor (Dr. Rajesh)", hint: "rajesh.faculty@campus.edu", pass: "faculty123" },
-              { key: "ipcell", label: "IP Cell Officer", hint: "ipcell@campus.edu", pass: "admin123" },
-              { key: "academics", label: "Academic Office", hint: "academics@campus.edu", pass: "admin123" },
+              { key: "student", label: "Student" },
+              { key: "faculty", label: "Mentor" },
+              { key: "ipcell", label: "IP Cell" },
+              { key: "academics", label: "Office" },
             ].map((p) => (
               <button
                 key={p.key}
                 type="button"
                 onClick={() => fillQuickLogin(p.key)}
                 style={{
-                  padding: "8px 10px",
+                  flex: 1,
+                  padding: "6px 8px",
+                  fontSize: "11px",
+                  fontWeight: 600,
                   backgroundColor: "#18181B",
                   color: "#FAFAFA",
-                  border: "1px solid #27272A",
+                  border: "1px solid #3F3F46",
                   borderRadius: "8px",
                   cursor: "pointer",
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "flex-start",
-                  textAlign: "left",
-                  gap: "2px",
                 }}
               >
-                <span style={{ fontSize: "11px", fontWeight: 600 }}>{p.label}</span>
-                <span style={{ fontSize: "10px", color: "#71717A", fontWeight: 400 }}>{p.hint}</span>
+                {p.label}
               </button>
             ))}
-          </div>
-          <div style={{ fontSize: "10px", color: "#71717A", borderTop: "1px solid #27272A", paddingTop: "6px", display: "flex", justifyContent: "space-between", flexWrap: "wrap", gap: "4px" }}>
-            <span>Passwords:</span>
-            <span>Student: <span style={{ color: "#3B82F6", fontFamily: "monospace" }}>student123</span></span>
-            <span>Faculty: <span style={{ color: "#8B5CF6", fontFamily: "monospace" }}>faculty123</span></span>
-            <span>Staff: <span style={{ color: "#10B981", fontFamily: "monospace" }}>admin123</span></span>
           </div>
         </div>
 
