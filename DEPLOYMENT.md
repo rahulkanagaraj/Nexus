@@ -106,11 +106,12 @@ The platform comes pre-seeded with sample users across all 3 key roles:
 
 | Role | Name | Email | Password |
 |---|---|---|---|
-| **Student Researcher** | Alex Johnson | `alex.student@campus.edu` | `student123` |
-| **Student Researcher** | Sarah Williams | `sarah.student@campus.edu` | `student123` |
-| **Faculty Mentor** | Dr. Robert Vance | `robert.faculty@campus.edu` | `faculty123` |
-| **Faculty Mentor** | Dr. Emily Carter | `emily.faculty@campus.edu` | `faculty123` |
+| **Student Researcher** | Aarav Sharma | `aarav.student@campus.edu` | `student123` |
+| **Student Researcher** | Ananya Patel | `ananya.student@campus.edu` | `student123` |
+| **Faculty Mentor** | Dr. Rajesh Kumar | `rajesh.faculty@campus.edu` | `faculty123` |
+| **Faculty Mentor** | Dr. Sunita Rao | `sunita.faculty@campus.edu` | `faculty123` |
 | **Institutional IP Cell** | IP Cell Officer | `ipcell@campus.edu` | `admin123` |
+| **Academic Administration** | Academic Office | `academics@campus.edu` | `admin123` |
 | **Platform Administrator** | Administrator | `admin@campus.edu` | `admin123` |
 
 > [!TIP]

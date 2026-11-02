@@ -83,10 +83,10 @@ CREATE TABLE IF NOT EXISTS ip_filings (
 
 -- Initial Seed Data for Testing & Demonstration
 INSERT INTO users (id, full_name, email, password_hash, role, department) VALUES
-(1, 'Alex Johnson', 'alex.student@campus.edu', 'student123', 'STUDENT', 'Computer Science & Engineering'),
-(2, 'Sarah Williams', 'sarah.student@campus.edu', 'student123', 'STUDENT', 'AI & Data Science'),
-(3, 'Dr. Robert Vance', 'robert.faculty@campus.edu', 'faculty123', 'FACULTY', 'Computer Science & Engineering'),
-(4, 'Dr. Emily Carter', 'emily.faculty@campus.edu', 'faculty123', 'FACULTY', 'AI & Data Science'),
+(1, 'Aarav Sharma', 'aarav.student@campus.edu', 'student123', 'STUDENT', 'Computer Science & Engineering'),
+(2, 'Ananya Patel', 'ananya.student@campus.edu', 'student123', 'STUDENT', 'AI & Data Science'),
+(3, 'Dr. Rajesh Kumar', 'rajesh.faculty@campus.edu', 'faculty123', 'FACULTY', 'Computer Science & Engineering'),
+(4, 'Dr. Sunita Rao', 'sunita.faculty@campus.edu', 'faculty123', 'FACULTY', 'AI & Data Science'),
 (5, 'Administrator', 'admin@campus.edu', 'admin123', 'ADMIN', 'Research & Development')
 ON DUPLICATE KEY UPDATE id=id;
 
@@ -104,9 +104,9 @@ ON DUPLICATE KEY UPDATE id=id;
 
 INSERT INTO milestones (id, project_id, milestone_name, status, notes) VALUES
 (1, 1, 'Proposal Submitted', 'COMPLETED', 'Initial PDF proposal uploaded by student'),
-(2, 1, 'Faculty Evaluation', 'IN_PROGRESS', 'Under review by Dr. Robert Vance'),
+(2, 1, 'Faculty Evaluation', 'IN_PROGRESS', 'Under review by Dr. Rajesh Kumar'),
 (3, 2, 'Proposal Submitted', 'COMPLETED', 'Proposal uploaded'),
-(4, 2, 'Faculty Evaluation', 'COMPLETED', 'Approved by Dr. Emily Carter'),
+(4, 2, 'Faculty Evaluation', 'COMPLETED', 'Approved by Dr. Sunita Rao'),
 (5, 2, 'Ready for IP Filing', 'IN_PROGRESS', 'Flagged as eligible for patent application')
 ON DUPLICATE KEY UPDATE id=id;
 
@@ -115,5 +115,5 @@ INSERT INTO reviews (id, project_id, faculty_id, status_change, feedback_text) V
 ON DUPLICATE KEY UPDATE id=id;
 
 INSERT INTO ip_filings (id, project_id, ip_type, application_no, filing_status, filing_date, inventors) VALUES
-(1, 2, 'PATENT', 'IN202641098234', 'DRAFTED', '2026-08-20', 'Sarah Williams, Dr. Emily Carter')
+(1, 2, 'PATENT', 'IN202641098234', 'DRAFTED', '2026-08-20', 'Ananya Patel, Dr. Sunita Rao')
 ON DUPLICATE KEY UPDATE id=id;

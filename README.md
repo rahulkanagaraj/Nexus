@@ -107,14 +107,15 @@ Vite (root `vite.config.js`) proxies `/api` and `/uploads` to `http://localhost:
 
 Created by `DataInitializer` when the user table is empty (IP Cell user is also inserted if missing).
 
-| Role | Email | Password |
-|---|---|---|
-| STUDENT | alex.student@campus.edu | student123 |
-| STUDENT | sarah.student@campus.edu | student123 |
-| FACULTY | robert.faculty@campus.edu | faculty123 |
-| FACULTY | emily.faculty@campus.edu | faculty123 |
-| IP_CELL | ipcell@campus.edu | admin123 |
-| ADMIN | admin@campus.edu | admin123 |
+| Role | Name | Email | Password |
+|---|---|---|---|
+| STUDENT | Aarav Sharma | aarav.student@campus.edu | student123 |
+| STUDENT | Ananya Patel | ananya.student@campus.edu | student123 |
+| FACULTY | Dr. Rajesh Kumar | rajesh.faculty@campus.edu | faculty123 |
+| FACULTY | Dr. Sunita Rao | sunita.faculty@campus.edu | faculty123 |
+| IP_CELL | IP Cell Officer | ipcell@campus.edu | admin123 |
+| ACADEMIC_OFFICE | Academic Office | academics@campus.edu | admin123 |
+| ADMIN | Platform Administrator | admin@campus.edu | admin123 |
 
 ---
 

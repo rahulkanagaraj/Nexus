@@ -171,8 +171,8 @@ export default function NewProjectModal({ isOpen, onClose, onProjectCreated, stu
                   outline: "none",
                 }}
               >
-                <option value="3">Dr. Robert Vance (CSE Dept)</option>
-                <option value="4">Dr. Emily Carter (AI & DS Dept)</option>
+                <option value="3">Dr. Rajesh Kumar (CSE Dept)</option>
+                <option value="4">Dr. Sunita Rao (AI &amp; DS Dept)</option>
               </select>
             </div>
           </div>

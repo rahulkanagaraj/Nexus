@@ -1468,7 +1468,7 @@ export default function IpFilingTracker() {
                   type="text"
                   value={editingFiling.inventors || ""}
                   onChange={(e) => setEditingFiling({ ...editingFiling, inventors: e.target.value })}
-                  placeholder="e.g. Sarah Williams, Dr. Emily Carter"
+                  placeholder="e.g. Ananya Patel, Dr. Sunita Rao"
                   style={{
                     width: "100%",
                     padding: "9px 12px",

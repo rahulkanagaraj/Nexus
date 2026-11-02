@@ -59,6 +59,24 @@ public class DataInitializer implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) {
+        // Auto-migrate legacy emails in existing databases so user credentials stay in sync
+        userRepository.findByEmailIgnoreCase("alex.student@campus.edu").ifPresent(user -> {
+            user.setEmail("aarav.student@campus.edu");
+            userRepository.save(user);
+        });
+        userRepository.findByEmailIgnoreCase("robert.faculty@campus.edu").ifPresent(user -> {
+            user.setEmail("rajesh.faculty@campus.edu");
+            userRepository.save(user);
+        });
+        userRepository.findByEmailIgnoreCase("sarah.student@campus.edu").ifPresent(user -> {
+            user.setEmail("ananya.student@campus.edu");
+            userRepository.save(user);
+        });
+        userRepository.findByEmailIgnoreCase("emily.faculty@campus.edu").ifPresent(user -> {
+            user.setEmail("sunita.faculty@campus.edu");
+            userRepository.save(user);
+        });
+
         if (userRepository.count() > 0) {
             return;
         }
@@ -66,18 +84,18 @@ public class DataInitializer implements ApplicationRunner {
         System.out.println("Initializing Nexus-AI Seed Data across 7 Departments & Simplified Domains...");
 
         // 1. Seed Faculty & Users Across 7 Departments (Indian Student Names)
-        User u1 = new User(null, "Aarav Sharma", "alex.student@campus.edu", passwordEncoder.encode("student123"), User.Role.STUDENT, "CSE", LocalDateTime.now());
-        User u2 = new User(null, "Ananya Patel", "sarah.student@campus.edu", passwordEncoder.encode("student123"), User.Role.STUDENT, "AI&DS", LocalDateTime.now());
+        User u1 = new User(null, "Aarav Sharma", "aarav.student@campus.edu", passwordEncoder.encode("student123"), User.Role.STUDENT, "CSE", LocalDateTime.now());
+        User u2 = new User(null, "Ananya Patel", "ananya.student@campus.edu", passwordEncoder.encode("student123"), User.Role.STUDENT, "AI&DS", LocalDateTime.now());
         User u3 = new User(null, "Rohan Verma", "rohan.student@campus.edu", passwordEncoder.encode("student123"), User.Role.STUDENT, "CSE", LocalDateTime.now());
 
         // Faculty Staff Across All 7 Depts (Indian Faculty Mentors)
-        User fCSE = new User(null, "Dr. Rajesh Kumar", "robert.faculty@campus.edu", passwordEncoder.encode("faculty123"), User.Role.FACULTY, "CSE", LocalDateTime.now());
-        User fAIDS = new User(null, "Dr. Sunita Rao", "emily.faculty@campus.edu", passwordEncoder.encode("faculty123"), User.Role.FACULTY, "AI&DS", LocalDateTime.now());
-        User fAIML = new User(null, "Prof. Vikramaditya Verma", "michael.aiml@campus.edu", passwordEncoder.encode("faculty123"), User.Role.FACULTY, "AI&ML", LocalDateTime.now());
+        User fCSE = new User(null, "Dr. Rajesh Kumar", "rajesh.faculty@campus.edu", passwordEncoder.encode("faculty123"), User.Role.FACULTY, "CSE", LocalDateTime.now());
+        User fAIDS = new User(null, "Dr. Sunita Rao", "sunita.faculty@campus.edu", passwordEncoder.encode("faculty123"), User.Role.FACULTY, "AI&DS", LocalDateTime.now());
+        User fAIML = new User(null, "Prof. Vikramaditya Verma", "vikram.aiml@campus.edu", passwordEncoder.encode("faculty123"), User.Role.FACULTY, "AI&ML", LocalDateTime.now());
         User fIT = new User(null, "Dr. Priya Sharma", "priya.it@campus.edu", passwordEncoder.encode("faculty123"), User.Role.FACULTY, "IT", LocalDateTime.now());
-        User fCSBS = new User(null, "Prof. Suresh Menon", "david.csbs@campus.edu", passwordEncoder.encode("faculty123"), User.Role.FACULTY, "CSBS", LocalDateTime.now());
-        User fECE = new User(null, "Dr. K. V. Ramanathan", "rajesh.ece@campus.edu", passwordEncoder.encode("faculty123"), User.Role.FACULTY, "ECE", LocalDateTime.now());
-        User fEEE = new User(null, "Prof. Meenakshi Sundaram", "anita.eee@campus.edu", passwordEncoder.encode("faculty123"), User.Role.FACULTY, "EEE", LocalDateTime.now());
+        User fCSBS = new User(null, "Prof. Suresh Menon", "suresh.csbs@campus.edu", passwordEncoder.encode("faculty123"), User.Role.FACULTY, "CSBS", LocalDateTime.now());
+        User fECE = new User(null, "Dr. K. V. Ramanathan", "ramanathan.ece@campus.edu", passwordEncoder.encode("faculty123"), User.Role.FACULTY, "ECE", LocalDateTime.now());
+        User fEEE = new User(null, "Prof. Meenakshi Sundaram", "meenakshi.eee@campus.edu", passwordEncoder.encode("faculty123"), User.Role.FACULTY, "EEE", LocalDateTime.now());
 
         User uIp = new User(null, "Institutional IP Cell Officer", "ipcell@campus.edu", passwordEncoder.encode("admin123"), User.Role.IP_CELL, "Institutional IP Cell", LocalDateTime.now());
         User uAcad = new User(null, "Academic Affairs Office", "academics@campus.edu", passwordEncoder.encode("admin123"), User.Role.ACADEMIC_OFFICE, "Academic Administration", LocalDateTime.now());

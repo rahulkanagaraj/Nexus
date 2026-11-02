@@ -26,15 +26,40 @@ public class AuthService {
         }
 
         String searchEmail = request.getEmail().trim().toLowerCase();
+
+        // Persona alias resolution for smooth backward compatibility
+        String aliasedEmail = searchEmail;
+        if (searchEmail.contains("alex")) {
+            aliasedEmail = "aarav.student@campus.edu";
+        } else if (searchEmail.contains("robert")) {
+            aliasedEmail = "rajesh.faculty@campus.edu";
+        } else if (searchEmail.contains("sarah")) {
+            aliasedEmail = "ananya.student@campus.edu";
+        } else if (searchEmail.contains("emily")) {
+            aliasedEmail = "sunita.faculty@campus.edu";
+        }
+
         Optional<User> userOpt = userRepository.findByEmailIgnoreCase(searchEmail);
+        if (userOpt.isEmpty() && !aliasedEmail.equals(searchEmail)) {
+            userOpt = userRepository.findByEmailIgnoreCase(aliasedEmail);
+        }
 
         if (userOpt.isEmpty()) {
-            // Also try prefix matching if user entered username like 'alex.student'
+            // Also try prefix / substring matching across all users
             List<User> all = userRepository.findAll();
             userOpt = all.stream()
                     .filter(u -> u.getEmail().toLowerCase().startsWith(searchEmail) ||
-                            u.getEmail().toLowerCase().equalsIgnoreCase(searchEmail))
+                            u.getEmail().toLowerCase().equalsIgnoreCase(searchEmail) ||
+                            u.getEmail().toLowerCase().contains(searchEmail))
                     .findFirst();
+
+            if (userOpt.isEmpty() && !aliasedEmail.equals(searchEmail)) {
+                final String finalAlias = aliasedEmail;
+                userOpt = all.stream()
+                        .filter(u -> u.getEmail().toLowerCase().startsWith(finalAlias) ||
+                                u.getEmail().toLowerCase().equalsIgnoreCase(finalAlias))
+                        .findFirst();
+            }
         }
 
         if (userOpt.isEmpty()) {

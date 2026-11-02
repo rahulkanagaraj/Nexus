@@ -73,11 +73,11 @@ export default function LoginPage() {
 
   const fillQuickLogin = (userType) => {
     if (userType === "student") {
-      setEmail("alex.student@campus.edu");
+      setEmail("aarav.student@campus.edu");
       setPassword("student123");
       setRole("STUDENT");
     } else if (userType === "faculty") {
-      setEmail("robert.faculty@campus.edu");
+      setEmail("rajesh.faculty@campus.edu");
       setPassword("faculty123");
       setRole("FACULTY");
     } else if (userType === "ipcell") {
@@ -153,30 +153,33 @@ export default function LoginPage() {
               Quick Demo Fill Persona
             </span>
           </div>
-          <div style={{ display: "flex", gap: "6px", flexWrap: "wrap" }}>
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "6px" }}>
             {[
-              { key: "student", label: "Student" },
-              { key: "faculty", label: "Mentor" },
-              { key: "ipcell", label: "IP Cell" },
-              { key: "academics", label: "Office" },
+              { key: "student", label: "Student (Aarav)", hint: "aarav.student@campus.edu" },
+              { key: "faculty", label: "Mentor (Dr. Rajesh)", hint: "rajesh.faculty@campus.edu" },
+              { key: "ipcell", label: "IP Cell Officer", hint: "ipcell@campus.edu" },
+              { key: "academics", label: "Academic Office", hint: "academics@campus.edu" },
             ].map((p) => (
               <button
                 key={p.key}
                 type="button"
                 onClick={() => fillQuickLogin(p.key)}
                 style={{
-                  flex: 1,
-                  padding: "6px 8px",
-                  fontSize: "11px",
-                  fontWeight: 600,
+                  padding: "8px 10px",
                   backgroundColor: "#18181B",
                   color: "#FAFAFA",
-                  border: "1px solid #3F3F46",
+                  border: "1px solid #27272A",
                   borderRadius: "8px",
                   cursor: "pointer",
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "flex-start",
+                  textAlign: "left",
+                  gap: "2px",
                 }}
               >
-                {p.label}
+                <span style={{ fontSize: "11px", fontWeight: 600 }}>{p.label}</span>
+                <span style={{ fontSize: "10px", color: "#71717A", fontWeight: 400 }}>{p.hint}</span>
               </button>
             ))}
           </div>
