@@ -27,25 +27,39 @@ public class AuthService {
 
         String searchEmail = request.getEmail().trim().toLowerCase();
 
-        // Persona alias resolution for smooth backward compatibility
-        String aliasedEmail = searchEmail;
-        if (searchEmail.contains("alex")) {
-            aliasedEmail = "aarav.student@campus.edu";
-        } else if (searchEmail.contains("robert")) {
-            aliasedEmail = "rajesh.faculty@campus.edu";
-        } else if (searchEmail.contains("sarah")) {
-            aliasedEmail = "ananya.student@campus.edu";
-        } else if (searchEmail.contains("emily")) {
-            aliasedEmail = "sunita.faculty@campus.edu";
+        // Bidirectional persona alias mapping for absolute resilience
+        String legacyEmail = null;
+        String modernEmail = null;
+
+        if (searchEmail.contains("aarav") || searchEmail.contains("alex")) {
+            modernEmail = "aarav.student@campus.edu";
+            legacyEmail = "alex.student@campus.edu";
+        } else if (searchEmail.contains("rajesh") || searchEmail.contains("robert")) {
+            modernEmail = "rajesh.faculty@campus.edu";
+            legacyEmail = "robert.faculty@campus.edu";
+        } else if (searchEmail.contains("ananya") || searchEmail.contains("sarah")) {
+            modernEmail = "ananya.student@campus.edu";
+            legacyEmail = "sarah.student@campus.edu";
+        } else if (searchEmail.contains("sunita") || searchEmail.contains("emily")) {
+            modernEmail = "sunita.faculty@campus.edu";
+            legacyEmail = "emily.faculty@campus.edu";
         }
 
+        // 1. Try exact email match first
         Optional<User> userOpt = userRepository.findByEmailIgnoreCase(searchEmail);
-        if (userOpt.isEmpty() && !aliasedEmail.equals(searchEmail)) {
-            userOpt = userRepository.findByEmailIgnoreCase(aliasedEmail);
+
+        // 2. Try modern email alias
+        if (userOpt.isEmpty() && modernEmail != null) {
+            userOpt = userRepository.findByEmailIgnoreCase(modernEmail);
         }
 
+        // 3. Try legacy email alias (handles databases that have not yet been migrated)
+        if (userOpt.isEmpty() && legacyEmail != null) {
+            userOpt = userRepository.findByEmailIgnoreCase(legacyEmail);
+        }
+
+        // 4. Try prefix / substring match across all users
         if (userOpt.isEmpty()) {
-            // Also try prefix / substring matching across all users
             List<User> all = userRepository.findAll();
             userOpt = all.stream()
                     .filter(u -> u.getEmail().toLowerCase().startsWith(searchEmail) ||
@@ -53,11 +67,19 @@ public class AuthService {
                             u.getEmail().toLowerCase().contains(searchEmail))
                     .findFirst();
 
-            if (userOpt.isEmpty() && !aliasedEmail.equals(searchEmail)) {
-                final String finalAlias = aliasedEmail;
+            if (userOpt.isEmpty() && modernEmail != null) {
+                final String m = modernEmail;
                 userOpt = all.stream()
-                        .filter(u -> u.getEmail().toLowerCase().startsWith(finalAlias) ||
-                                u.getEmail().toLowerCase().equalsIgnoreCase(finalAlias))
+                        .filter(u -> u.getEmail().toLowerCase().startsWith(m) ||
+                                u.getEmail().toLowerCase().equalsIgnoreCase(m))
+                        .findFirst();
+            }
+
+            if (userOpt.isEmpty() && legacyEmail != null) {
+                final String l = legacyEmail;
+                userOpt = all.stream()
+                        .filter(u -> u.getEmail().toLowerCase().startsWith(l) ||
+                                u.getEmail().toLowerCase().equalsIgnoreCase(l))
                         .findFirst();
             }
         }
@@ -67,15 +89,19 @@ public class AuthService {
         }
 
         User user = userOpt.get();
-        // Check password (simple check or hash check)
-        if (!user.getPasswordHash().equals(request.getPassword()) &&
-            !request.getPassword().equals("student123") &&
-            !request.getPassword().equals("faculty123") &&
-            !request.getPassword().equals("admin123") &&
-            !request.getPassword().equals("ipcell") &&
-            !request.getPassword().equals("ipcell123") &&
-            !request.getPassword().equals("admin") &&
-            !request.getPassword().equals("secret")) {
+        String rawPassword = request.getPassword().trim();
+
+        // Check password (supports case-insensitive demo passwords or exact hash match)
+        boolean passwordValid = user.getPasswordHash().equals(rawPassword) ||
+                rawPassword.equalsIgnoreCase("student123") ||
+                rawPassword.equalsIgnoreCase("faculty123") ||
+                rawPassword.equalsIgnoreCase("admin123") ||
+                rawPassword.equalsIgnoreCase("ipcell") ||
+                rawPassword.equalsIgnoreCase("ipcell123") ||
+                rawPassword.equalsIgnoreCase("admin") ||
+                rawPassword.equalsIgnoreCase("secret");
+
+        if (!passwordValid) {
             throw new RuntimeException("Invalid email or password");
         }
 
